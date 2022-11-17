@@ -18,13 +18,16 @@ func init() {
 var g1 *gen.Generator
 var genConfig *gen.CmdParams
 
-func prepare() {
+func prepare(ctx context.Context, parser *gcmd.Parser) {
 	os.Remove("gorm.db")
 	log.SetFlags(log.Llongfile)
 	genConfig = gen.ArgParse()
 	if genConfig == nil {
 		log.Fatalf("parse genConfig fail")
 	}
+	genConfig.DSN = parser.GetOpt("dsn", "./gorm.db").String()
+	genConfig.DB = parser.GetOpt("db", "sqlite").String()
+	genConfig.OutPath = parser.GetOpt("outPath", "./app/dao").String()
 	//schema.RegisterSerializer("auto", database.AutoSerializer{})
 	if db, err := gen.Connect(gen.DBType(genConfig.DB), genConfig.DSN); err != nil {
 		log.Fatalf("connect db server fail: %v", err)
@@ -52,7 +55,7 @@ var gn = &gcmd.Command{
 		if !gfile.Exists("go.mod") {
 			return errors.New("此为开发使用命令")
 		}
-		prepare()
+		prepare(ctx, parser)
 		m := []any{
 			table.Token{},
 			table.User{},
