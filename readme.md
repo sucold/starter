@@ -1,2 +1,2 @@
-go mod init conset
+go mod init github.com/hinego/conset
 go mod tidy

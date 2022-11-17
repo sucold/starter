@@ -3,9 +3,9 @@ package admin
 import (
 	"context"
 	"errors"
+	"github.com/hinego/conset/api/v8"
 	"github.com/hinego/errorx"
 	"github.com/hinego/gen/field"
-	"github.com/hinego/starter/app/conset/api/v8"
 	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/types"
