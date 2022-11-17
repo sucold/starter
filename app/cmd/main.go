@@ -5,11 +5,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
-	"github.com/hinego/starter/internal/conset"
-	admin2 "github.com/hinego/starter/internal/conset/admin"
-	"github.com/hinego/starter/internal/conset/swagger"
-	"github.com/hinego/starter/internal/response"
-	"github.com/hinego/starter/internal/service"
+	"github.com/hinego/starter/app/conset"
+	admin2 "github.com/hinego/starter/app/conset/admin"
+	"github.com/hinego/starter/app/conset/swagger"
+	"github.com/hinego/starter/app/response"
+	"github.com/hinego/starter/app/service"
 	"github.com/hinego/tox"
 )
 

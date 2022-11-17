@@ -2,7 +2,7 @@ package v8
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/hinego/starter/internal/model"
+	"github.com/hinego/starter/app/model"
 	"github.com/hinego/types"
 )
 

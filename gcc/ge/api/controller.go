@@ -5,8 +5,8 @@ import (
 	"github.com/hinego/errorx"
 	"github.com/hinego/starter/api"
 	{{.API}} "github.com/hinego/starter/api/{{.API}}"
-	"github.com/hinego/starter/internal/dao"
-	"github.com/hinego/starter/internal/model"
+	"github.com/hinego/starter/app/dao"
+	"github.com/hinego/starter/app/model"
 )
 
 type {{.NameLower}}Controller struct{}
