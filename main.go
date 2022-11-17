@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	//test
 	log.SetFlags(log.Llongfile)
 	cmd.Main.Run(gctx.New())
 }
