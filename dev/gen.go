@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/hinego/gen"
 	"github.com/hinego/starter/dev/table"
+	"gorm.io/gorm"
 	"log"
 	"os"
 )
@@ -17,15 +18,16 @@ func init() {
 
 var g1 *gen.Generator
 var genConfig *gen.CmdParams
+var gdb *gorm.DB
 
 func prepare(ctx context.Context, parser *gcmd.Parser) {
-	os.Remove("gorm.db")
+	os.Remove("/etc/gen.db")
 	log.SetFlags(log.Llongfile)
 	genConfig = gen.ArgParse()
 	if genConfig == nil {
 		log.Fatalf("parse genConfig fail")
 	}
-	genConfig.DSN = parser.GetOpt("dsn", "./gorm.db").String()
+	genConfig.DSN = parser.GetOpt("dsn", "/etc/gen.db").String()
 	genConfig.DB = parser.GetOpt("db", "sqlite").String()
 	genConfig.OutPath = parser.GetOpt("outPath", "./app/dao").String()
 	//schema.RegisterSerializer("auto", database.AutoSerializer{})
@@ -44,6 +46,7 @@ func prepare(ctx context.Context, parser *gcmd.Parser) {
 			FieldSignable:     genConfig.FieldSignable,
 		})
 		g1.UseDB(db)
+		gdb = db
 	}
 }
 
@@ -65,7 +68,11 @@ var gn = &gcmd.Command{
 			g1.ApplyBasic(g1.GenerateAllTable()...)
 		}
 		g1.Execute()
-		os.Remove("gorm.db")
+		db, err := gdb.DB()
+		if err == nil {
+			db.Close()
+			os.Remove("/etc/gen.db")
+		}
 		return nil
 	},
 }
