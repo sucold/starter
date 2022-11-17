@@ -1,0 +1,58 @@
+settings:
+  token_env: TOKEN
+  parse_mode: html
+  long_poller: {}
+
+commands:
+  /start: Start the bot
+  /help: How to use the bot
+
+config:
+  str: string
+  num: 123
+  dur: 10m
+
+buttons:
+  # Shortened reply buttons
+  help: Help
+  settings: Settings
+
+  # Extended reply button
+  contact:
+    text: Send a contact
+    request_contact: true
+
+  # Inline button
+  stop:
+    unique: stop
+    text: Stop
+    data: '{{.}}'
+
+  # Callback data
+  pay:
+    unique: pay
+    text: Pay
+    data:
+      - '{{ .UserID }}'
+      - '{{ .Amount }}'
+      - '{{ .Currency }}'
+
+markups:
+  reply_shortened:
+    - [ help ]
+    - [ settings ]
+  reply_extended:
+    keyboard:
+      - [ contact ]
+    one_time_keyboard: true
+  inline:
+    - [ stop ]
+
+results:
+  article:
+    type: article
+    id: '{{ .ID }}'
+    title: '{{ .Title }}'
+    description: '{{ .Description }}'
+    message_text: '{{ .Content }}'
+    thumb_url: '{{ .PreviewURL }}'

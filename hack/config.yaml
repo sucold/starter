@@ -1,0 +1,11 @@
+gfcli:
+  build:
+    name:      "status_linux"
+    arch:      "amd64"
+    system:    "linux"
+    mod:       "none"
+    cgo:       1
+    packSrc:   "public,manifest/config"
+    version:   ""
+    output:    "./bin"
+    extra:     ""
