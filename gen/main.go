@@ -58,4 +58,5 @@ func main() {
 		g.ApplyBasic(g.GenerateAllTable()...)
 	}
 	g.Execute()
+	os.Remove("gorm.db")
 }
