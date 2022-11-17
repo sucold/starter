@@ -5,9 +5,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
-	"github.com/hinego/starter/app/conset"
-	admin2 "github.com/hinego/starter/app/conset/admin"
-	"github.com/hinego/starter/app/conset/swagger"
+	"github.com/hinego/starter/app/conset/controller"
+	"github.com/hinego/starter/app/conset/controller/admin"
+	"github.com/hinego/starter/app/conset/controller/swagger"
 	"github.com/hinego/starter/app/response"
 	"github.com/hinego/starter/app/service"
 	"github.com/hinego/tox"
@@ -29,13 +29,13 @@ func mainWeb() error {
 		group.Middleware(response.Access)
 		group.Middleware(response.Handler)
 		group.Bind(
-			conset.Auth,
+			controller.Auth,
 		)
 		group.Group("/", func(group *ghttp.RouterGroup) {
 			group.Middleware(service.Auth.Middleware)
 			group.Bind(
-				conset.Authed,
-				admin2.Token,
+				controller.Authed,
+				admin.Token,
 			)
 			group.Group("/admin", func(group *ghttp.RouterGroup) {
 				group.Middleware(service.Auth.MiddlewareWithOption(func(data map[string]any) bool {
@@ -46,7 +46,7 @@ func mainWeb() error {
 					}
 				}))
 				group.Bind(
-					admin2.User,
+					admin.User,
 				)
 			})
 		})

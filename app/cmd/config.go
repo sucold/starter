@@ -9,11 +9,11 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/os/gres"
 	"github.com/hinego/starter/app/cache"
+	"github.com/hinego/starter/app/conset/service/mail"
 	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/database"
 	"github.com/hinego/starter/app/model"
-	"github.com/hinego/starter/app/service/mail"
 	"golang.org/x/crypto/bcrypt"
 	"strings"
 )

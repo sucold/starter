@@ -1,7 +1,6 @@
 module github.com/hinego/starter
 
 go 1.19
-
 require (
 	github.com/alibabacloud-go/darabonba-openapi v0.2.1
 	github.com/alibabacloud-go/dm-20151123 v1.0.4

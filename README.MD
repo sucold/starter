@@ -8,6 +8,12 @@ $env:GOOS="linux"
 $env:GOARCH="amd64"
 go build -buildmode=pie -ldflags "-s -w" -o C:\root\static\$(git branch --show-current) main.go
 
+submod
+
+git submodule add https://github.com/hinego/conset   app/conset
+rm app/conset
+git submodule update --remote
+
 
 $env:CGO_ENABLED=1
 $env:GOOS="linux"

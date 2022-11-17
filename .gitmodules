@@ -1,0 +1,3 @@
+[submodule "app/conset"]
+	path = app/conset
+	url = https://github.com/hinego/conset
