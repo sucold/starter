@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/hinego/gen"
 	"github.com/hinego/systemd/internal/database"
 	"github.com/hinego/systemd/internal/table"
-	"gorm.io/gen"
 	"gorm.io/gorm/schema"
 	"log"
 	"os"
@@ -19,6 +19,16 @@ func init() {
 	if config == nil {
 		log.Fatalf("parse config fail")
 	}
+	//log.Println(config.DSN)
+	//if config.DSN == "" {
+	//	config.DSN = "./gorm.db"
+	//}
+	//if config.DB == "" {
+	//	config.DB = "sqlite"
+	//}
+	//if config.OutPath == "" {
+	//	config.OutPath = "../internal/dao"
+	//}
 	schema.RegisterSerializer("auto", database.AutoSerializer{})
 	if db, err := gen.Connect(gen.DBType(config.DB), config.DSN); err != nil {
 		log.Fatalf("connect db server fail: %v", err)
@@ -42,10 +52,6 @@ func main() {
 	m := []any{
 		table.Token{},
 		table.User{},
-		table.Bin{},
-		table.File{},
-		table.Country{},
-		table.Transform{},
 	}
 	g.LinkModel(m...)
 	if !config.OnlyModel {

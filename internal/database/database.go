@@ -1,7 +1,6 @@
 package database
 
 import (
-	"github.com/hinego/systemd/internal/model"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -30,7 +29,7 @@ func Initial(dsn string) error {
 	if err != nil {
 		return err
 	}
-	log.Println("db.AutoMigrate", db.AutoMigrate(model.Token{}, model.User{}, model.Bin{}, model.File{}, model.Country{}, model.Transform{}))
+	//log.Println("db.AutoMigrate", db.AutoMigrate(model.Token{}, model.User{}, model.Bin{}, model.File{}, model.Country{}, model.Transform{}))
 	DB = db
 	return err
 }
