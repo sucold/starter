@@ -1,4 +1,4 @@
-package conset
+package controller
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/util/grand"
 	"github.com/hinego/authentic"
 	"github.com/hinego/conset/api"
-	"github.com/hinego/conset/mail"
+	mail2 "github.com/hinego/conset/service/mail"
 	"github.com/hinego/errorx"
 	"github.com/hinego/starter/app/cache"
 	"github.com/hinego/starter/app/consts"
@@ -93,11 +93,11 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 	}
 	key := c.sendKey(req.Mail, req.Type)
 	var code = gconv.String(grand.N(100000, 999999))
-	var expire = time.Duration(mail.Conf.Expire) * time.Second
+	var expire = time.Duration(mail2.Conf.Expire) * time.Second
 	var balance time.Duration
 	if balance, err = cache.GetExpire(ctx, key); err == nil {
 		ex := int64(expire.Seconds()) - int64(balance.Seconds())
-		if ex < mail.Conf.DiffTime {
+		if ex < mail2.Conf.DiffTime {
 			return nil, errorx.New("验证码已发送，请过一会儿再请求")
 		}
 	}
@@ -120,7 +120,7 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 			return nil, errorx.New("邮箱已在系统中存在")
 		}
 	}
-	if err = mail.Send(ctx, req.Mail, mail.RegisterTPL, params); err != nil {
+	if err = mail2.Send(ctx, req.Mail, mail2.RegisterTPL, params); err != nil {
 		return nil, err
 	}
 	if err = cache.Set(ctx, c.sendKey(req.Mail, req.Type), code, expire); err != nil {
@@ -131,7 +131,7 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 	return nil, errorx.NewCode(0, "发送成功", code)
 }
 func (c *authController) verifyCode(ctx context.Context, req *api.AuthSendReq, code string) error {
-	var expire = time.Duration(mail.Conf.Expire) * time.Second
+	var expire = time.Duration(mail2.Conf.Expire) * time.Second
 	if get, err := cache.Get(ctx, c.sendKey(req.Mail, req.Type)); err != nil {
 		return errorx.New("请先获取邮箱验证码")
 	} else {
@@ -141,7 +141,7 @@ func (c *authController) verifyCode(ctx context.Context, req *api.AuthSendReq, c
 		errKey := c.sendKey(req.Mail, req.Type+"|error")
 		var fail *gvar.Var
 		if fail, err = cache.Get(ctx, errKey); err == nil {
-			if fail.Int64() >= mail.Conf.ErrorTimes {
+			if fail.Int64() >= mail2.Conf.ErrorTimes {
 				return errorx.New(fmt.Sprintf("错误次数过多，请重新获取"))
 			}
 		}
