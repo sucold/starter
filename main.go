@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gogf/gf/v2/os/gctx"
-	"github.com/hinego/systemd/internal/cmd"
-	_ "github.com/hinego/systemd/internal/packed"
+	"github.com/hinego/starter/internal/cmd"
+	_ "github.com/hinego/starter/internal/packed"
 	"log"
 )
 

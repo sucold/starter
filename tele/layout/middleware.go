@@ -1,6 +1,6 @@
 package layout
 
-import "github.com/hinego/systemd/tele"
+import "github.com/hinego/starter/tele"
 
 // LocaleFunc is the function used to fetch the locale of the recipient.
 // Returned locale will be remembered and linked to the corresponding context.

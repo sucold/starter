@@ -1,4 +1,4 @@
-module github.com/hinego/systemd
+module github.com/hinego/starter
 
 go 1.19
 

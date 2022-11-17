@@ -2,7 +2,7 @@ package layout
 
 import (
 	"fmt"
-	"github.com/hinego/systemd/tele"
+	"github.com/hinego/starter/tele"
 	"io/ioutil"
 	"os"
 	"path/filepath"

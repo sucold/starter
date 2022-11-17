@@ -1,7 +1,7 @@
 package consts
 
 import (
-	"github.com/hinego/systemd/internal/dao"
+	"github.com/hinego/starter/internal/dao"
 	"gorm.io/gen/field"
 )
 

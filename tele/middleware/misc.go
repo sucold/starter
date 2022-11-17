@@ -1,6 +1,6 @@
 package middleware
 
-import "github.com/hinego/systemd/tele"
+import "github.com/hinego/starter/tele"
 
 func AutoRespond() tele.MiddlewareFunc {
 	return func(next tele.HandlerFunc) tele.HandlerFunc {

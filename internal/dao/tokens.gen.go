@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/hinego/systemd/internal/model"
+	"github.com/hinego/starter/internal/model"
 )
 
 func newToken(db *gorm.DB, opts ...gen.DOOption) token {

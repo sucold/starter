@@ -1,6 +1,6 @@
 package layout
 
-import "github.com/hinego/systemd/tele"
+import "github.com/hinego/starter/tele"
 
 // DefaultLayout is a simplified layout instance with pre-defined locale by default.
 type DefaultLayout struct {

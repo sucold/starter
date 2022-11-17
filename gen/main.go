@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/hinego/gen"
-	"github.com/hinego/systemd/internal/database"
-	"github.com/hinego/systemd/internal/table"
+	"github.com/hinego/starter/internal/database"
+	"github.com/hinego/starter/internal/table"
 	"gorm.io/gorm/schema"
 	"log"
 	"os"

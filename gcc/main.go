@@ -1,6 +1,6 @@
 package main
 
-import "github.com/hinego/systemd/gcc/ge"
+import "github.com/hinego/starter/gcc/ge"
 
 func main() {
 	var data = ge.APP{

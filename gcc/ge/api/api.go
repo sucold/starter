@@ -2,8 +2,8 @@ package {{.API}}
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/hinego/systemd/api"
-	"github.com/hinego/systemd/internal/model"
+	"github.com/hinego/starter/api"
+	"github.com/hinego/starter/internal/model"
 )
 {{range $k, $v := .Actions}}
 type {{$v.Name}}{{$v.Action}}Req struct {

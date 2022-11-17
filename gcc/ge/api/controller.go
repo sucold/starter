@@ -3,10 +3,10 @@ package {{.Controller}}
 import (
 	"context"
 	"github.com/hinego/errorx"
-	"github.com/hinego/systemd/api"
-	{{.API}} "github.com/hinego/systemd/api/{{.API}}"
-	"github.com/hinego/systemd/internal/dao"
-	"github.com/hinego/systemd/internal/model"
+	"github.com/hinego/starter/api"
+	{{.API}} "github.com/hinego/starter/api/{{.API}}"
+	"github.com/hinego/starter/internal/dao"
+	"github.com/hinego/starter/internal/model"
 )
 
 type {{.NameLower}}Controller struct{}

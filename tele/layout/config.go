@@ -1,7 +1,7 @@
 package layout
 
 import (
-	"github.com/hinego/systemd/tele"
+	"github.com/hinego/starter/tele"
 	"strconv"
 	"time"
 
