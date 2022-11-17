@@ -38,7 +38,7 @@ func (c *{{$v.NameLower}}Controller) {{$v.Action}}(ctx context.Context, req *{{$
     return nil, errorx.NewCode(0, "更新成功", nil){{else if eq $v.Action "Fetch"}}
     res = &{{$v.API}}.{{$v.Name}}{{$v.Action}}Res{
 		PageReq: &req.PageReq,
-		PageRes: &api.PageRes{},
+		PageRes: &types.PageRes{},
 		Data:    make([]*model.{{$v.Name}}, 0),
 	}
     if res.Total, err = u.Order(u.ID).ScanByPage(&res.Data, res.Offset(), res.Size); err != nil {

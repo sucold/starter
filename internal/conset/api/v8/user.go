@@ -3,7 +3,7 @@ package v8
 import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/hinego/decimal"
-	"github.com/hinego/starter/api"
+	"github.com/hinego/types"
 )
 
 type FetchUser struct {
@@ -19,11 +19,11 @@ type FetchUser struct {
 }
 type UserFetchReq struct {
 	g.Meta `path:"/user/fetch" method:"get" sm:"用户列表" tags:"用户管理"`
-	api.PageReq
+	types.PageReq
 }
 type UserFetchRes struct {
-	*api.PageReq
-	*api.PageRes
+	*types.PageReq
+	*types.PageRes
 	Data []*FetchUser `json:"data"`
 }
 type UserUpdateReq struct {

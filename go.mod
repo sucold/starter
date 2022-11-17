@@ -15,12 +15,12 @@ require (
 	github.com/hinego/errorx v0.0.0-20221105103501-9a9e8179272b
 	github.com/hinego/gen v0.0.0-20221117091600-4eeecfa6e812
 	github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9
+	github.com/hinego/types v0.0.0-20221117100212-2173e3c23c2d
 	github.com/samber/lo v1.35.0
 	github.com/spf13/cast v1.5.0
 	golang.org/x/crypto v0.3.0
 	golang.org/x/net v0.2.0
 	gorm.io/driver/sqlite v1.4.3
-	gorm.io/gen v0.3.18
 	gorm.io/gorm v1.24.1
 	gorm.io/plugin/dbresolver v1.3.0
 )

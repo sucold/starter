@@ -4,12 +4,12 @@ import (
 	"context"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/hinego/errorx"
-	"github.com/hinego/starter/api"
 	"github.com/hinego/starter/internal/conset/api/v8"
 	"github.com/hinego/starter/internal/consts"
 	"github.com/hinego/starter/internal/dao"
 	"github.com/hinego/starter/internal/model"
 	"github.com/hinego/starter/internal/service"
+	"github.com/hinego/types"
 )
 
 type tokenController struct{}
@@ -25,7 +25,7 @@ func (c *tokenController) Fetch(ctx context.Context, req *v8.TokenFetchReq) (res
 	)
 	res = &v8.TokenFetchRes{
 		PageReq: &req.PageReq,
-		PageRes: &api.PageRes{},
+		PageRes: &types.PageRes{},
 		Data:    make([]*model.Token, 0),
 	}
 	var u = dao.Token

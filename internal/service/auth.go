@@ -6,11 +6,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/hinego/authentic"
+	"github.com/hinego/gen"
 	"github.com/hinego/starter/internal/cache"
 	"github.com/hinego/starter/internal/consts"
 	"github.com/hinego/starter/internal/dao"
 	"github.com/hinego/starter/internal/model"
-	"gorm.io/gen"
 	"time"
 )
 

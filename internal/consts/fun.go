@@ -1,8 +1,7 @@
 package consts
 
 import (
-	"github.com/hinego/starter/internal/dao"
-	"gorm.io/gen/field"
+	"github.com/hinego/gen/field"
 )
 
 func Sort(sortMap map[string]string, sorter map[string][2]field.Expr) field.Expr {
@@ -16,5 +15,5 @@ func Sort(sortMap map[string]string, sorter map[string][2]field.Expr) field.Expr
 			}
 		}
 	}
-	return dao.Bin.ID.Desc()
+	return field.NewInt64("table", "id").Desc()
 }

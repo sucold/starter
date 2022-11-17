@@ -2,17 +2,17 @@ package v8
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/hinego/starter/api"
 	"github.com/hinego/starter/internal/model"
+	"github.com/hinego/types"
 )
 
 type TokenFetchReq struct {
 	g.Meta `path:"/token/fetch" method:"get" sm:"密钥列表" tags:"密钥管理"`
-	api.PageReq
+	types.PageReq
 }
 type TokenFetchRes struct {
-	*api.PageReq
-	*api.PageRes
+	*types.PageReq
+	*types.PageRes
 	Data []*model.Token `json:"data"`
 }
 type TokenUpdateReq struct {

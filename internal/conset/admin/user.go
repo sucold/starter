@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 	"github.com/hinego/errorx"
-	"github.com/hinego/starter/api"
+	"github.com/hinego/gen/field"
 	"github.com/hinego/starter/internal/conset/api/v8"
 	"github.com/hinego/starter/internal/consts"
 	"github.com/hinego/starter/internal/dao"
-	"gorm.io/gen/field"
+	"github.com/hinego/types"
 )
 
 type userController struct{}
@@ -24,7 +24,7 @@ func (c *userController) Fetch(ctx context.Context, req *v8.UserFetchReq) (res *
 	//)
 	res = &v8.UserFetchRes{
 		PageReq: &req.PageReq,
-		PageRes: &api.PageRes{},
+		PageRes: &types.PageRes{},
 		Data:    make([]*v8.FetchUser, 0),
 	}
 	var u = dao.User
