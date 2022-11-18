@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 	"github.com/hinego/conset/api/v8"
+	"github.com/hinego/conset/base"
 	"github.com/hinego/errorx"
 	"github.com/hinego/gen/field"
-	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/types"
 )
@@ -20,7 +20,7 @@ var (
 func (c *userController) Fetch(ctx context.Context, req *v8.UserFetchReq) (res *v8.UserFetchRes, err error) {
 	//var (
 	//r  = g.RequestFromCtx(ctx)
-	//id = r.GetParam(consts.UserKey).Int64()
+	//id = r.GetParam(base.UserKey).Int64()
 	//)
 	res = &v8.UserFetchRes{
 		PageReq: &req.PageReq,
@@ -46,7 +46,7 @@ func (c *userController) Update(ctx context.Context, req *v8.UserUpdateReq) (res
 		data = append(data, u.Name.Value(req.Name))
 	}
 	if req.Password != "" {
-		data = append(data, u.Name.Value(consts.GeneratorPassword(req.Password)))
+		data = append(data, u.Name.Value(base.GeneratorPassword(req.Password)))
 	}
 	if req.Role != "" {
 		data = append(data, u.Role.Value(req.Role))

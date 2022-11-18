@@ -11,10 +11,10 @@ import (
 	"github.com/gogf/gf/v2/util/grand"
 	"github.com/hinego/authentic"
 	"github.com/hinego/conset/api"
+	"github.com/hinego/conset/base"
 	"github.com/hinego/conset/service/mail"
 	"github.com/hinego/errorx"
 	"github.com/hinego/starter/app/cache"
-	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/model"
 	"github.com/hinego/starter/app/service"
@@ -40,11 +40,11 @@ func (c *authController) Login(ctx context.Context, req *api.AuthLoginReq) (res 
 	)
 	if user, err = dao.User.Where(dao.User.Email.Like(req.Username)).First(); err != nil {
 		return nil, ErrIncorrectUserName
-	} else if err = bcrypt.CompareHashAndPassword([]byte(user.Password), consts.Salt(req.Password)); err != nil {
+	} else if err = bcrypt.CompareHashAndPassword([]byte(user.Password), base.Salt(req.Password)); err != nil {
 		return nil, ErrIncorrectUserName
 	} else {
 		var token *authentic.Context
-		if token, err = service.Auth.CreateToken(ctx, map[string]any{consts.UserKey: user.ID, "role": user.Role}); err != nil {
+		if token, err = service.Auth.CreateToken(ctx, map[string]any{base.UserKey: user.ID, "role": user.Role}); err != nil {
 			return nil, err
 		} else {
 			ret := map[string]any{
@@ -66,7 +66,7 @@ func (c *authController) Register(ctx context.Context, req *api.AuthRegisterReq)
 		Email: req.Username,
 		IP:    r.GetClientIp(),
 	}
-	if password, err = bcrypt.GenerateFromPassword(consts.Salt(req.Password), bcrypt.DefaultCost); err != nil {
+	if password, err = bcrypt.GenerateFromPassword(base.Salt(req.Password), bcrypt.DefaultCost); err != nil {
 		return nil, err
 	} else {
 		user.Password = string(password)
@@ -102,7 +102,7 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 		}
 	}
 	params := map[string]any{
-		"name":   consts.AppName,
+		"name":   base.AppName,
 		"code":   code,
 		"expire": int64(expire.Seconds()) / 60,
 		"url":    "https://baidu.com",
@@ -174,7 +174,7 @@ func (c *authController) Forget(ctx context.Context, req *api.AuthForgetReq) (re
 		return nil, err
 	}
 	u := dao.User
-	if password, err = bcrypt.GenerateFromPassword(consts.Salt(req.Password), bcrypt.DefaultCost); err != nil {
+	if password, err = bcrypt.GenerateFromPassword(base.Salt(req.Password), bcrypt.DefaultCost); err != nil {
 		return nil, err
 	} else if _, err = u.Where(u.Email.Like(req.Username)).UpdateSimple(u.Password.Value(string(password))); err != nil {
 		return nil, err
@@ -188,7 +188,7 @@ func (c *authedController) User(ctx context.Context, req *api.AuthUserReq) (res 
 	var (
 		u    = dao.User
 		r    = g.RequestFromCtx(ctx)
-		id   = r.GetParam(consts.UserKey).Int64()
+		id   = r.GetParam(base.UserKey).Int64()
 		user *model.User
 	)
 	if user, err = u.Where(u.ID.Eq(id)).First(); err != nil {
@@ -208,10 +208,10 @@ func (c *authedController) Reset(ctx context.Context, req *api.AuthResetReq) (re
 	var (
 		u        = dao.User
 		r        = g.RequestFromCtx(ctx)
-		id       = r.GetParam(consts.UserKey).Int64()
+		id       = r.GetParam(base.UserKey).Int64()
 		password []byte
 	)
-	if password, err = bcrypt.GenerateFromPassword(consts.Salt(req.Password), bcrypt.DefaultCost); err != nil {
+	if password, err = bcrypt.GenerateFromPassword(base.Salt(req.Password), bcrypt.DefaultCost); err != nil {
 		return nil, err
 	} else if _, err = u.Where(u.ID.Eq(id)).UpdateSimple(u.Password.Value(string(password))); err != nil {
 		return nil, err

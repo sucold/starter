@@ -7,6 +7,8 @@ import (
 
 const (
 	PassSalt = "ASDGVRgrege258OP:PHGNHG<"
+	AppName  = "全球网络加速服务"
+	UserKey  = "JWT_UserKey"
 )
 
 func Salt(password string) []byte {
