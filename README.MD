@@ -5,10 +5,11 @@ go run ./dev gen -dsn "./gorm.db" -db "sqlite" -outPath "./app/dao"
 go run ./dev gen -db "sqlite" -outPath "./app/dao"
 go run ./dev sync
 go run ./dev gcc-
-```
-
-
 git submodule add https://github.com/hinego/conset   app/conset
 rm app/conset
 git submodule update --remote
+```
+
+
+
 
