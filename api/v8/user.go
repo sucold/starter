@@ -44,3 +44,10 @@ type UserCreateReq struct {
 }
 type UserCreateRes struct {
 }
+
+type UserDeleteReq struct {
+	g.Meta `path:"/user/delete" method:"post" sm:"删除用户" tags:"用户管理"`
+	ID     int64 `json:"id"`
+}
+type UserDeleteRes struct {
+}

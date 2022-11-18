@@ -68,3 +68,13 @@ func (c *userController) Create(ctx context.Context, req *v8.UserCreateReq) (res
 	}
 	return nil, errorx.NewCode(0, "创建成功", nil)
 }
+func (c *userController) Delete(ctx context.Context, req *v8.UserDeleteReq) (res *v8.UserDeleteRes, err error) {
+	var (
+		u = dao.User
+	)
+	_, err = u.Where(u.ID.Eq(req.ID)).Delete()
+	if err != nil {
+		return nil, err
+	}
+	return nil, errorx.NewCode(0, "删除成功", nil)
+}
