@@ -1,4 +1,4 @@
-//go:build sqlite
+//go:build !postgres && !mysql
 
 package database
 
