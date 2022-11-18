@@ -1,13 +1,13 @@
 module github.com/hinego/starter
 
 go 1.19
+
 require (
 	github.com/alibabacloud-go/darabonba-openapi v0.2.1
 	github.com/alibabacloud-go/dm-20151123 v1.0.4
 	github.com/alibabacloud-go/tea v1.1.20
 	github.com/alibabacloud-go/tea-utils v1.4.5
 	github.com/go-resty/resty/v2 v2.7.0
-	github.com/goccy/go-yaml v1.9.6
 	github.com/gogf/gf/v2 v2.2.4
 	github.com/hinego/authentic v0.0.0-20221110072710-a69ad618ba31
 	github.com/hinego/decimal v1.3.5
@@ -16,9 +16,7 @@ require (
 	github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9
 	github.com/hinego/types v0.0.0-20221117100212-2173e3c23c2d
 	github.com/samber/lo v1.35.0
-	github.com/spf13/cast v1.5.0
 	golang.org/x/crypto v0.3.0
-	golang.org/x/net v0.2.0
 	gorm.io/driver/sqlite v1.4.3
 	gorm.io/gorm v1.24.1
 	gorm.io/plugin/dbresolver v1.3.0
@@ -72,10 +70,10 @@ require (
 	go.opentelemetry.io/otel/trace v1.7.0 // indirect
 	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect
 	golang.org/x/mod v0.7.0 // indirect
+	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/tools v0.3.0 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.0.7 // indirect
