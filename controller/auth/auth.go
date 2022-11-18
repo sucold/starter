@@ -1,4 +1,4 @@
-package controller
+package auth
 
 import (
 	"bytes"
@@ -12,9 +12,9 @@ import (
 	"github.com/hinego/authentic"
 	"github.com/hinego/conset/api"
 	"github.com/hinego/conset/base"
+	"github.com/hinego/conset/cache"
 	"github.com/hinego/conset/service/mail"
 	"github.com/hinego/errorx"
-	"github.com/hinego/starter/app/cache"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/model"
 	"github.com/hinego/starter/app/service"

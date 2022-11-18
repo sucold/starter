@@ -58,6 +58,7 @@ type AuthForgetReq struct {
 	Code     string `json:"code" v:"required|length:6,6#请输入验证码|验证码长度为{min}位" dc:"验证码"`
 }
 type AuthForgetRes struct{}
+
 type AuthResetReq struct {
 	g.Meta   `path:"/auth/reset" method:"post" sm:"重置密码" tags:"身份验证"`
 	Password string `json:"password" v:"required|length:8,32#请输入密码|密码长度为{min}到{max}位" dc:"密码"`

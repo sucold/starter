@@ -2,7 +2,6 @@ package base
 
 import (
 	"crypto/tls"
-	"github.com/hinego/starter/app/consts"
 )
 
 const (
@@ -65,7 +64,7 @@ u1zCNfFEw2RUB+7tbJg1cpXqiq9RfmSMkf+zpLCiRffBuMCnLJL+gaxEj1Og6Au/
 )
 
 func SSLConfig() (*tls.Config, error) {
-	pair, err := tls.X509KeyPair([]byte(consts.ServerCert), []byte(consts.ServerKey))
+	pair, err := tls.X509KeyPair([]byte(ServerCert), []byte(ServerKey))
 	if err != nil {
 		return nil, err
 	}

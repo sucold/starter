@@ -5,7 +5,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-const (
+var (
 	PassSalt = "ASDGVRgrege258OP:PHGNHG<"
 	AppName  = "全球网络加速服务"
 	UserKey  = "JWT_UserKey"
