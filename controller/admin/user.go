@@ -33,7 +33,6 @@ func (c *userController) Fetch(ctx context.Context, req *v8.UserFetchReq) (res *
 	}
 	return
 }
-
 func (c *userController) Update(ctx context.Context, req *v8.UserUpdateReq) (res *v8.UserUpdateRes, err error) {
 	var (
 		u    = dao.User
@@ -46,7 +45,7 @@ func (c *userController) Update(ctx context.Context, req *v8.UserUpdateReq) (res
 		data = append(data, u.Name.Value(req.Name))
 	}
 	if req.Password != "" {
-		data = append(data, u.Name.Value(base.GeneratorPassword(req.Password)))
+		data = append(data, u.Password.Value(base.GeneratorPassword(req.Password)))
 	}
 	if req.Role != "" {
 		data = append(data, u.Role.Value(req.Role))
@@ -56,4 +55,16 @@ func (c *userController) Update(ctx context.Context, req *v8.UserUpdateReq) (res
 		return nil, err
 	}
 	return nil, errorx.NewCode(0, "更新成功", nil)
+}
+func (c *userController) Create(ctx context.Context, req *v8.UserCreateReq) (res *v8.UserCreateRes, err error) {
+	var (
+		u = dao.User
+	)
+	req.User.ID = 0
+	req.User.Password = base.GeneratorPassword(req.Password)
+	err = u.Create(&req.User)
+	if err != nil {
+		return nil, err
+	}
+	return nil, errorx.NewCode(0, "创建成功", nil)
 }

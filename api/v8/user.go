@@ -3,6 +3,7 @@ package v8
 import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/hinego/decimal"
+	"github.com/hinego/starter/app/model"
 	"github.com/hinego/types"
 )
 
@@ -35,4 +36,11 @@ type UserUpdateReq struct {
 	Role     string           `gorm:"column:role;type:text;not null" json:"role"`
 }
 type UserUpdateRes struct {
+}
+
+type UserCreateReq struct {
+	g.Meta `path:"/user/create" method:"post" sm:"更新用户" tags:"用户管理"`
+	model.User
+}
+type UserCreateRes struct {
 }
