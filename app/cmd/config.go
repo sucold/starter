@@ -9,13 +9,11 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/os/gres"
 	"github.com/hinego/starter/app/cache"
-	"github.com/hinego/starter/app/conset/service/mail"
 	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/database"
 	"github.com/hinego/starter/app/model"
 	"golang.org/x/crypto/bcrypt"
-	"strings"
 )
 
 type configCommand struct{}
@@ -56,34 +54,24 @@ func (r *configCommand) Proxy(request *ghttp.Request) {
 		request.Response.Status = 404
 	}
 }
-func (r *configCommand) initEmail() error {
-	mailConfig := &mail.Config{
-		Endpoint:          "dm.aliyuncs.com",
-		AccessKeyId:       "LTAI5tKtV9PNgW2evEADaMte",
-		AccessKeySecret:   "rVLeNZyYImp0nS9r93H45dVgltlP6l",
-		AccountName:       "admin@goant.xyz",
-		AddressType:       1,
-		ReplyToAddress:    true,
-		FromAlias:         consts.AppName,
-		ReplyAddress:      "admin@skyqq.cc",
-		ReplyAddressAlias: consts.AppName,
-		Expire:            1800,
-		ErrorTimes:        5,
-		DiffTime:          60,
-	}
-	return mail.Init(mailConfig)
-}
-func (r *configCommand) initHosts() error {
-	var (
-		path = "/etc/hosts"
-		host = "127.0.0.1 " + consts.ServerName
-	)
-	hosts := gfile.GetContents(path)
-	if !strings.Contains(hosts, host) {
-		return gfile.PutContentsAppend(path, "\n"+host+"\n")
-	}
-	return nil
-}
+
+//	func (r *configCommand) initEmail() error {
+//		mailConfig := &mail.Config{
+//			Endpoint:          "dm.aliyuncs.com",
+//			AccessKeyId:       "LTAI5tKtV9PNgW2evEADaMte",
+//			AccessKeySecret:   "rVLeNZyYImp0nS9r93H45dVgltlP6l",
+//			AccountName:       "admin@goant.xyz",
+//			AddressType:       1,
+//			ReplyToAddress:    true,
+//			FromAlias:         consts.AppName,
+//			ReplyAddress:      "admin@skyqq.cc",
+//			ReplyAddressAlias: consts.AppName,
+//			Expire:            1800,
+//			ErrorTimes:        5,
+//			DiffTime:          60,
+//		}
+//		return mail.Init(mailConfig)
+//	}
 func (r *configCommand) initUser() error {
 	var (
 		u = dao.User
