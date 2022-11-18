@@ -5,10 +5,10 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/hinego/conset/api/v8"
 	"github.com/hinego/conset/base"
+	"github.com/hinego/conset/service"
 	"github.com/hinego/errorx"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/model"
-	"github.com/hinego/starter/app/service"
 	"github.com/hinego/types"
 )
 
