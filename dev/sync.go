@@ -39,6 +39,7 @@ var syn = &gcmd.Command{
 			log.Println("复制main.go", err)
 			err = gfile.ReplaceFile("package command", "package cmd", "./app/cmd/main.go")
 			log.Println("替换main.go", err)
+			Bash("git add app/cmd/main.go", "git add")
 		}
 		return nil
 	},

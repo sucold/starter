@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gfile"
 	"log"
+	"os/exec"
 	"strings"
 )
 
@@ -105,19 +106,31 @@ func (r *APP) generate() {
 	for _, group := range *r {
 		for _, model := range group.Model {
 			var data = model.Map()
-			control, err := g.View().ParseContent(context.TODO(), controllerTemplate, data)
 			conPath := fmt.Sprintf("./app/controller/%v/%v.go", model.Controller, model.NameLower)
-			log.Println(err, gfile.PutContents(conPath, control))
-
-			control, err = g.View().ParseContent(context.TODO(), apiTemplate, data)
+			if !gfile.Exists(conPath) {
+				control, err := g.View().ParseContent(context.TODO(), controllerTemplate, data)
+				log.Println(err, gfile.PutContents(conPath, control))
+				Bash("git add "+conPath, "git add "+conPath)
+			}
 			ApiPath := fmt.Sprintf("./api/%v/%v.go", model.API, model.NameLower)
-			log.Println(err, gfile.PutContents(ApiPath, control))
+			if !gfile.Exists(ApiPath) {
+				control, err := g.View().ParseContent(context.TODO(), apiTemplate, data)
+				log.Println(err, gfile.PutContents(ApiPath, control))
+				Bash("git add "+ApiPath, "git add "+ApiPath)
+			}
 		}
 		for _, model := range group.Logic {
 			var data = model.Map()
-			control, err := g.View().ParseContent(context.TODO(), logicTemplate, data)
 			ApiPath := fmt.Sprintf("./app/logic/%v.go", model.NameLower)
-			log.Println(err, gfile.PutContents(ApiPath, control))
+			if !gfile.Exists(ApiPath) {
+				control, err := g.View().ParseContent(context.TODO(), logicTemplate, data)
+				log.Println(err, gfile.PutContents(ApiPath, control))
+				Bash("git add "+ApiPath, "git add "+ApiPath)
+			}
 		}
 	}
+}
+func Bash(sh string, desc string) {
+	output, err := exec.Command("cmd", "/C", sh).CombinedOutput()
+	log.Println(desc, err, string(output))
 }
