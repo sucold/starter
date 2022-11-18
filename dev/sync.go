@@ -34,6 +34,12 @@ var syn = &gcmd.Command{
 				log.Println(f, err)
 			}
 		}
+		if !gfile.Exists("./app/cmd/main.go") {
+			err = gfile.Copy("./app/conset/command/main.go", "./app/cmd/main.go")
+			log.Println("复制main.go", err)
+			err = gfile.ReplaceFile("package command", "package cmd", "./app/cmd/main.go")
+			log.Println("替换main.go", err)
+		}
 		return nil
 	},
 }
