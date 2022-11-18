@@ -1,19 +1,11 @@
 package cmd
 
 import (
-	"bytes"
-	"crypto/tls"
 	"github.com/gogf/gf/v2/database/gredis"
-	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcache"
-	"github.com/gogf/gf/v2/os/gfile"
-	"github.com/gogf/gf/v2/os/gres"
 	"github.com/hinego/starter/app/cache"
-	"github.com/hinego/starter/app/consts"
 	"github.com/hinego/starter/app/dao"
 	"github.com/hinego/starter/app/database"
-	"github.com/hinego/starter/app/model"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type configCommand struct{}
@@ -42,79 +34,4 @@ func (r *configCommand) initRedis() error {
 		cache.DefaultCache.SetAdapter(gcache.NewAdapterRedis(redis))
 		return nil
 	}
-}
-func (r *configCommand) Proxy(request *ghttp.Request) {
-	request.Response.Status = 200
-	file := gres.Get("public/index.html")
-	if file != nil {
-		request.Response.Write(file.Content())
-	} else if data := gfile.GetBytes("public/index.html"); data != nil {
-		request.Response.Write(data)
-	} else {
-		request.Response.Status = 404
-	}
-}
-
-//	func (r *configCommand) initEmail() error {
-//		mailConfig := &mail.Config{
-//			Endpoint:          "dm.aliyuncs.com",
-//			AccessKeyId:       "LTAI5tKtV9PNgW2evEADaMte",
-//			AccessKeySecret:   "rVLeNZyYImp0nS9r93H45dVgltlP6l",
-//			AccountName:       "admin@goant.xyz",
-//			AddressType:       1,
-//			ReplyToAddress:    true,
-//			FromAlias:         consts.AppName,
-//			ReplyAddress:      "admin@skyqq.cc",
-//			ReplyAddressAlias: consts.AppName,
-//			Expire:            1800,
-//			ErrorTimes:        5,
-//			DiffTime:          60,
-//		}
-//		return mail.Init(mailConfig)
-//	}
-func (r *configCommand) initUser() error {
-	var (
-		u = dao.User
-	)
-	if count, err := u.Count(); err != nil {
-		return err
-	} else {
-		if count != 0 {
-			return nil
-		}
-	}
-	data := []*model.User{
-		{
-			ID:       1,
-			Email:    "admin@qq.com",
-			Password: r.salt("AaGG12345678"),
-			IP:       "127.0.0.1",
-			Role:     "admin",
-		},
-		{
-			Email:    "12345@qq.com",
-			Password: r.salt("s51234512348"),
-			IP:       "127.0.0.1",
-			Role:     "user",
-			ID:       2,
-		},
-	}
-	return u.Create(data...)
-}
-func (r *configCommand) salt(password string) string {
-	var buffer bytes.Buffer
-	buffer.WriteString(password)
-	buffer.WriteString("__|__")
-	buffer.WriteString(consts.PassSalt)
-	pass, _ := bcrypt.GenerateFromPassword(buffer.Bytes(), bcrypt.DefaultCost)
-	return string(pass)
-}
-func (r *configCommand) TLSConfig() (*tls.Config, error) {
-	pair, err := tls.X509KeyPair([]byte(consts.ServerCert), []byte(consts.ServerKey))
-	if err != nil {
-		return nil, err
-	}
-	return &tls.Config{
-		Certificates: []tls.Certificate{pair},
-	}, nil
 }
