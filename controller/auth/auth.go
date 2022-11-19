@@ -182,6 +182,26 @@ func (c *authController) Forget(ctx context.Context, req *api.AuthForgetReq) (re
 	return nil, errorx.NewCode(0, "重置成功", nil)
 }
 func (c *authedController) Session(ctx context.Context, req *api.AuthSessionReq) (res *api.AuthSessionRes, err error) {
+	var (
+		u    = dao.User
+		r    = g.RequestFromCtx(ctx)
+		id   = r.GetParam(base.UserKey).Int64()
+		user *model.User
+	)
+	if user, err = u.Where(u.ID.Eq(id)).First(); err != nil {
+		return nil, err
+	}
+	res = &api.AuthSessionRes{
+		User: api.AuthLoginUser{
+			ID:        user.ID,
+			CreatedAt: user.CreatedAt,
+			UpdatedAt: user.UpdatedAt,
+			Name:      user.Name,
+			Email:     user.Email,
+			Role:      user.Role,
+		},
+		Setting: base.DefaultSetting,
+	}
 	return
 }
 func (c *authedController) User(ctx context.Context, req *api.AuthUserReq) (res *api.AuthUserRes, err error) {

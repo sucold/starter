@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/hinego/conset/base"
 	"github.com/hinego/starter/app/model"
 	"time"
 )
@@ -38,7 +39,18 @@ type AuthLogoutRes struct{}
 type AuthSessionReq struct {
 	g.Meta `path:"/auth/session" method:"post" sm:"登录记录" tags:"身份验证"`
 }
-type AuthSessionRes struct{}
+type AuthLoginUser struct {
+	ID        int64  `gorm:"column:id;type:integer;primaryKey" json:"id"`
+	CreatedAt int64  `gorm:"column:created_at;type:integer;not null" json:"created_at"`
+	UpdatedAt int64  `gorm:"column:updated_at;type:integer;not null" json:"updated_at"`
+	Name      string `gorm:"column:name;type:text;not null" json:"name"`
+	Email     string `gorm:"column:email;type:text;not null" json:"email"`
+	Role      string `gorm:"column:role;type:text;not null" json:"role"`
+}
+type AuthSessionRes struct {
+	User    AuthLoginUser `json:"user"`
+	Setting base.Setting  `json:"setting"`
+}
 type AuthSendReq struct {
 	g.Meta `path:"/auth/send" method:"post" sm:"发验证码" tags:"身份验证"`
 	Mail   string `json:"mail" v:"required|email#请输入邮箱|请输入正确的邮箱地址" dc:"邮箱"` //邮箱
