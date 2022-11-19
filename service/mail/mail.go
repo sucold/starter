@@ -10,18 +10,18 @@ import (
 )
 
 type Config struct {
-	Endpoint          string
-	AccessKeyId       string
-	AccessKeySecret   string
-	AccountName       string
-	AddressType       int32
-	ReplyToAddress    bool
-	FromAlias         string
-	ReplyAddress      string
-	ReplyAddressAlias string
-	Expire            int64
-	ErrorTimes        int64
-	DiffTime          int64
+	Endpoint          string `json:"endpoint"`
+	AccessKeyId       string `json:"access_key_id"`
+	AccessKeySecret   string `json:"access_key_secret"`
+	AccountName       string `json:"account_name"`
+	AddressType       int32  `json:"address_type"`
+	ReplyToAddress    bool   `json:"reply_to_address"`
+	FromAlias         string `json:"from_alias"`
+	ReplyAddress      string `json:"reply_address"`
+	ReplyAddressAlias string `json:"reply_address_alias"`
+	Expire            int64  `json:"expire"`
+	ErrorTimes        int64  `json:"error_times"`
+	DiffTime          int64  `json:"diff_time"`
 }
 
 var (
@@ -50,7 +50,6 @@ func CreateClient(accessKeyId *string, accessKeySecret *string) (result *dm20151
 }
 
 func Send(ctx context.Context, to string, template *Template, params ...map[string]any) (err error) {
-	return nil
 	var content string
 	var subject string
 	if content, err = g.View().ParseContent(ctx, template.Body, params...); err != nil {
@@ -70,7 +69,7 @@ func Send(ctx context.Context, to string, template *Template, params ...map[stri
 		ReplyAddress:      tea.String(Conf.ReplyAddress),
 		ReplyAddressAlias: tea.String(Conf.ReplyAddressAlias),
 	}
-	if _, err := client.SingleSendMailWithOptions(singleSendMailRequest, options); err != nil {
+	if _, err = client.SingleSendMailWithOptions(singleSendMailRequest, options); err != nil {
 		return err
 	}
 	return nil

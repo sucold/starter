@@ -48,8 +48,8 @@ type AuthLoginUser struct {
 	Role      string `gorm:"column:role;type:text;not null" json:"role"`
 }
 type AuthSessionRes struct {
-	User    AuthLoginUser `json:"user"`
-	Setting base.Setting  `json:"setting"`
+	User    *AuthLoginUser `json:"user,omitempty"`
+	Setting base.Setting   `json:"setting"`
 }
 type AuthSendReq struct {
 	g.Meta `path:"/auth/send" method:"post" sm:"发验证码" tags:"身份验证"`

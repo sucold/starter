@@ -181,18 +181,26 @@ func (c *authController) Forget(ctx context.Context, req *api.AuthForgetReq) (re
 	}
 	return nil, errorx.NewCode(0, "重置成功", nil)
 }
-func (c *authedController) Session(ctx context.Context, req *api.AuthSessionReq) (res *api.AuthSessionRes, err error) {
+func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (res *api.AuthSessionRes, err error) {
 	var (
 		u    = dao.User
 		r    = g.RequestFromCtx(ctx)
 		id   = r.GetParam(base.UserKey).Int64()
 		user *model.User
 	)
+	service.Auth.Middleware(r)
+	if r.GetError() != nil {
+		res = &api.AuthSessionRes{
+			User:    nil,
+			Setting: base.DefaultSetting,
+		}
+		return
+	}
 	if user, err = u.Where(u.ID.Eq(id)).First(); err != nil {
 		return nil, err
 	}
 	res = &api.AuthSessionRes{
-		User: api.AuthLoginUser{
+		User: &api.AuthLoginUser{
 			ID:        user.ID,
 			CreatedAt: user.CreatedAt,
 			UpdatedAt: user.UpdatedAt,
