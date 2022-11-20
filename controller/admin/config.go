@@ -13,6 +13,9 @@ var (
 	Config = configController{}
 )
 
+func (c *configController) Get(ctx context.Context, req *v8.ConfigGetReq) (res *v8.ConfigGetRes, err error) {
+	return nil, errorx.NewCode(0, "success", base.DefaultSetting)
+}
 func (c *configController) Update(ctx context.Context, req *v8.ConfigUpdateReq) (res *v8.ConfigUpdateRes, err error) {
 	base.DefaultSetting.Desc = req.Desc
 	base.DefaultSetting.Register = req.Register
