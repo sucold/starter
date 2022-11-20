@@ -2,7 +2,13 @@ package v8
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/hinego/conset/base"
 )
+
+type ConfigGetReq struct {
+	g.Meta `path:"/config/get" method:"get" sm:"更新配置" tags:"系统设置"`
+}
+type ConfigGetRes base.Setting
 
 type ConfigUpdateReq struct {
 	g.Meta   `path:"/config/update" method:"post" sm:"更新配置" tags:"系统设置"`

@@ -191,7 +191,7 @@ func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (
 	if r.GetError() != nil {
 		res = &api.AuthSessionRes{
 			User:    nil,
-			Setting: base.DefaultSetting,
+			Setting: base.DefaultSetting.JSON(),
 		}
 		return nil, errorx.NewCode(-1, authentic.ErrForbidden.Error(), res)
 	}
@@ -208,7 +208,7 @@ func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (
 			Email:     user.Email,
 			Role:      user.Role,
 		},
-		Setting: base.DefaultSetting,
+		Setting: base.DefaultSetting.JSON(),
 	}
 	return
 }

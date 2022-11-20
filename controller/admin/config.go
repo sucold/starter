@@ -19,8 +19,8 @@ func (c *configController) Update(ctx context.Context, req *v8.ConfigUpdateReq) 
 	base.DefaultSetting.Forget = req.Forget
 	base.DefaultSetting.Verify = req.Verify
 	base.DefaultSetting.Icon = req.Icon
-	base.DefaultSetting.Layout.Logo = req.Logo
-	base.DefaultSetting.Layout.Title = req.Title
+	base.DefaultSetting.Logo = req.Logo
+	base.DefaultSetting.Title = req.Title
 	base.SaveConfig()
 	return nil, errorx.NewCode(0, "更新成功", nil)
 }

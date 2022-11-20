@@ -2,7 +2,6 @@ package api
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/hinego/conset/base"
 	"github.com/hinego/starter/app/model"
 	"time"
 )
@@ -49,7 +48,7 @@ type AuthLoginUser struct {
 }
 type AuthSessionRes struct {
 	User    *AuthLoginUser `json:"user,omitempty"`
-	Setting base.Setting   `json:"setting"`
+	Setting map[string]any `json:"setting"`
 }
 type AuthSendReq struct {
 	g.Meta `path:"/auth/send" method:"post" sm:"发验证码" tags:"身份验证"`
