@@ -185,7 +185,6 @@ func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (
 	var (
 		u    = dao.User
 		r    = g.RequestFromCtx(ctx)
-		id   = r.GetParam(base.UserKey).Int64()
 		user *model.User
 	)
 	service.Auth.Middleware(r)
@@ -196,6 +195,7 @@ func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (
 		}
 		return nil, errorx.NewCode(-1, authentic.ErrForbidden.Error(), res)
 	}
+	id := r.GetParam(base.UserKey).Int64()
 	if user, err = u.Where(u.ID.Eq(id)).First(); err != nil {
 		return nil, err
 	}
