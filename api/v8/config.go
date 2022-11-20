@@ -25,7 +25,7 @@ type ConfigUpdateRes struct {
 }
 
 type ConfigUploadReq struct {
-	g.Meta `path:"/config/update" method:"post" sm:"更新配置" tags:"系统设置"`
+	g.Meta `path:"/config/upload" method:"post" sm:"更新配置" tags:"系统设置"`
 	File   *ghttp.UploadFile `json:"files" type:"file" dc:"上传文件"`
 	Name   string            `json:"name" dc:"上传类型（logo.svg|favicon.ico）" v:"in:logo.svg,favicon.ico"`
 }
