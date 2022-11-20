@@ -13,6 +13,7 @@ import (
 	"github.com/hinego/conset/database"
 	"github.com/hinego/conset/response"
 	"github.com/hinego/conset/service"
+	"github.com/hinego/conset/tab"
 	"github.com/hinego/tox"
 )
 
@@ -62,8 +63,8 @@ func mainWeb() error {
 
 func mainFunc(ctx context.Context, parser *gcmd.Parser) (err error) {
 	app := []func() error{
-		database.Init,     //连接数据库
-		service.StartAuth, //启动JWT
+		database.Init(tab.User{}, tab.Token{}), //连接数据库
+		service.StartAuth,                      //启动JWT
 		boot.InitUser,
 		mainWeb, //启动web服务
 	}
