@@ -2,6 +2,7 @@ package v8
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/hinego/conset/base"
 )
 
@@ -21,4 +22,12 @@ type ConfigUpdateReq struct {
 	Title    string `json:"title" dc:"网站名称"`
 }
 type ConfigUpdateRes struct {
+}
+
+type ConfigUploadReq struct {
+	g.Meta `path:"/config/update" method:"post" sm:"更新配置" tags:"系统设置"`
+	File   *ghttp.UploadFile `json:"files" type:"file" dc:"上传文件"`
+	Name   string            `json:"name" dc:"上传类型（logo.svg|favicon.ico）" v:"in:logo.svg,favicon.ico"`
+}
+type ConfigUploadRes struct {
 }

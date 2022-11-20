@@ -27,3 +27,10 @@ func (c *configController) Update(ctx context.Context, req *v8.ConfigUpdateReq) 
 	base.SaveConfig()
 	return nil, errorx.NewCode(0, "更新成功", nil)
 }
+func (c *configController) Upload(ctx context.Context, req *v8.ConfigUploadReq) (res *v8.ConfigUploadRes, err error) {
+	_, err = req.File.Save("public/save_" + req.Name)
+	if err != nil {
+		return nil, err
+	}
+	return nil, errorx.NewCode(0, "上传成功（可能需要清楚浏览器缓存后生效）", nil)
+}
