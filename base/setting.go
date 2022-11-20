@@ -44,6 +44,7 @@ var DefaultSetting = Setting{
 	NavTheme:     "light",
 	ColorPrimary: "#13C2C2",
 	Logo:         "/logo.svg",
+	Icon:         "/favicon.ico",
 	Title:        "默认名称",
 	Register:     true,
 	Forget:       true,
