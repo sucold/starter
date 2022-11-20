@@ -2,6 +2,7 @@ package base
 
 import (
 	"encoding/json"
+	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/os/gfile"
 )
 
@@ -27,14 +28,17 @@ var DefaultSetting = Setting{
 		Logo:         "/logo.svg",
 		Title:        "默认名称",
 	},
-	Register: false,
-	Forget:   false,
-	Verify:   false,
+	Register: true,
+	Forget:   true,
+	Verify:   true,
 	Desc:     "最牛逼的卖牛平台面板",
 }
 
 const SettingPath = "setting.json"
 
+func SaveConfig() {
+	_ = gfile.PutBytes(SettingPath, gjson.MustEncode(DefaultSetting))
+}
 func init() {
 	if gfile.Exists(SettingPath) {
 		data := gfile.GetBytes(SettingPath)

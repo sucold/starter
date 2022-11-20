@@ -51,6 +51,7 @@ func mainWeb() error {
 				}))
 				group.Bind(
 					admin.User,
+					admin.Config,
 				)
 			})
 		})
