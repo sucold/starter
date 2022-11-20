@@ -9,3 +9,4 @@ gfcli:
     version:   ""
     output:    "./bin"
     extra:     ""
+    packDst:   "app/packed/build_pack_data.go"

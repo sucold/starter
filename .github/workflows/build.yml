@@ -1,0 +1,20 @@
+name: Build and Deploy
+
+on: push
+jobs:
+  build:
+    name: Build And Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Github Code
+        uses: actions/checkout@v2
+      - name: Set Up Golang Environment
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19.3
+      - name: Install Wget
+        run: sudo apt-get install wget -y
+      - name: Install Goframe
+        run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
+      - name: test
+        run: gf -h
