@@ -20,3 +20,5 @@ jobs:
         run: gf -h
       - name: ls
         run: ls
+      - name: Curl
+        run: curl ip.sb
