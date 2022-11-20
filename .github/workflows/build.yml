@@ -18,3 +18,5 @@ jobs:
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
       - name: test
         run: gf -h
+      - name: ls
+        run: ls
