@@ -23,6 +23,7 @@ func InitUser() error {
 	}
 	data := []*model.User{
 		{
+			Name:     "超级管理员",
 			Email:    "admin@qq.com",
 			Password: base.GeneratorPassword("AaGG12345678"),
 			IP:       "127.0.0.1",

@@ -13,6 +13,7 @@ type ProLayout struct {
 }
 type Setting struct {
 	Layout   ProLayout `json:"layout"`
+	Icon     string    `json:"icon" dc:"ICON图标"`
 	Register bool      `json:"register" dc:"开放注册"`
 	Forget   bool      `json:"forget" dc:"开放找回"`
 	Verify   bool      `json:"verify" dc:"注册验证"`
