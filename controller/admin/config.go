@@ -28,7 +28,8 @@ func (c *configController) Update(ctx context.Context, req *v8.ConfigUpdateReq) 
 	return nil, errorx.NewCode(0, "更新成功", nil)
 }
 func (c *configController) Upload(ctx context.Context, req *v8.ConfigUploadReq) (res *v8.ConfigUploadRes, err error) {
-	_, err = req.File.Save("public/save_" + req.Name)
+	req.File.Filename = "save_" + req.Name
+	_, err = req.File.Save("public")
 	if err != nil {
 		return nil, err
 	}
