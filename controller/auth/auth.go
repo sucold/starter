@@ -194,7 +194,7 @@ func (c *authController) Session(ctx context.Context, req *api.AuthSessionReq) (
 			User:    nil,
 			Setting: base.DefaultSetting,
 		}
-		return
+		return nil, errorx.NewCode(-1, authentic.ErrForbidden.Error(), res)
 	}
 	if user, err = u.Where(u.ID.Eq(id)).First(); err != nil {
 		return nil, err

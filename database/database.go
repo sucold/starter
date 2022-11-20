@@ -35,3 +35,18 @@ func Init() error {
 	dao.SetDefault(db)
 	return err
 }
+func InitAutoMigrate(mod ...any) error {
+	schema.RegisterSerializer("auto", AutoSerializer{})
+	var err error
+	var db = new(gorm.DB)
+	dsn := g.Cfg().MustGet(context.TODO(), "gorm").String()
+	db, err = gorm.Open(GetDial(dsn), Config)
+	if err != nil {
+		return err
+	}
+	if err = db.AutoMigrate(mod...); err != nil {
+		return err
+	}
+	dao.SetDefault(db)
+	return err
+}
