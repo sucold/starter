@@ -20,7 +20,10 @@ manifest/output/
 temp/
 app/conset
 log
-*.exe
-*/*.exe
-*/*/*.exe
-*/*/*/*.exe
+**.exe
+**.html
+**.css
+**.js
+**.log
+**.db
+setting.json
