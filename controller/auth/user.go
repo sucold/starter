@@ -48,6 +48,9 @@ func (c *userController) Update(ctx context.Context, req *v7.UserUpdateReq) (res
 	)
 	where = append(where, u.Name.Value(req.Name))
 	if req.Password != "" {
+		if req.Password == req.Password1 {
+			return nil, errorx.NewCode(-1, "新密码不能与旧密码相同", nil)
+		}
 		where = append(where, u.Password.Value(base.GeneratorPassword(req.Password1)))
 	}
 	_, err = u.Where(u.ID.Eq(id)).UpdateSimple(where...)

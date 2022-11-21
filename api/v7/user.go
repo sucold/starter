@@ -7,8 +7,8 @@ import (
 type UserUpdateReq struct {
 	g.Meta    `path:"/user/update" method:"post" sm:"更新信息" tags:"用户管理"`
 	Name      string `gorm:"column:name;type:text;not null" json:"name"`
-	Password  string `json:"password" dc:"原密码" v:"required-with:Password1|length:6,30#请输入新密码|密码长度为6-30位"`
-	Password1 string `json:"password1" dc:"新密码" v:"required-with:Password|length:6,30#请输入旧密码|密码长度为6-30位"`
+	Password  string `json:"password" dc:"原密码" v:"required-with:Password1|length:8,30#请输入新密码|密码长度为8-30位"`
+	Password1 string `json:"password1" dc:"新密码" v:"required-with:Password|length:8,30#请输入旧密码|密码长度为8-30位"`
 }
 type UserUpdateRes struct {
 }
