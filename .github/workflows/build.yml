@@ -6,8 +6,13 @@ jobs:
     name: Build And Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Github Code
-        uses: actions/checkout@v2
+      - name: Checkout Backend Code
+        uses: actions/checkout@v3
+      - name: Checkout Frontend Code
+        uses: actions/checkout@v3
+        with:
+          repository: ${{github.repository}}-ui
+          path: 'ui'
       - name: Set Up Golang Environment
         uses: actions/setup-go@v2
         with:
@@ -17,4 +22,6 @@ jobs:
       - name: Install Goframe
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
       - name: Checkout Project's Frontend Code
-        run: echo ${{github.repository}}
+        run: ls
+      - name: Build Frontend Code
+        run: ls ui
