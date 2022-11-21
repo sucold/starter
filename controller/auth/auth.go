@@ -102,7 +102,7 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 		}
 	}
 	params := map[string]any{
-		"name":   base.AppName,
+		"name":   base.DefaultSetting.Title,
 		"code":   code,
 		"expire": int64(expire.Seconds()) / 60,
 		"url":    "https://baidu.com",
