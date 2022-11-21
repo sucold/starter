@@ -39,6 +39,7 @@ func mainWeb() error {
 			group.Middleware(service.Auth.Middleware)
 			group.Bind(
 				auth.Authed,
+				auth.User,
 				admin.Token,
 			)
 			group.Group("/admin", func(group *ghttp.RouterGroup) {
@@ -67,6 +68,7 @@ func mainFunc(ctx context.Context, parser *gcmd.Parser) (err error) {
 		database.Init(tab.User{}, tab.Token{}), //连接数据库
 		service.StartAuth,                      //启动JWT
 		boot.InitUser,
+		boot.InitEmail(nil),
 		mainWeb, //启动web服务
 	}
 	return tox.WithError(app...)

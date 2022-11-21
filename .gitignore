@@ -20,3 +20,7 @@ manifest/output/
 temp/
 app/conset
 log
+*.exe
+*/*.exe
+*/*/*.exe
+*/*/*/*.exe
