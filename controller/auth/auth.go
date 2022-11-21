@@ -88,6 +88,7 @@ func (c *authController) Register(ctx context.Context, req *api.AuthRegisterReq)
 	}
 }
 func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *api.AuthSendRes, err error) {
+	r := g.RequestFromCtx(ctx)
 	if !lo.Contains([]string{"register", "forget"}, req.Type) {
 		return nil, errorx.New("不支持的验证码类型")
 	}
@@ -105,7 +106,7 @@ func (c *authController) Send(ctx context.Context, req *api.AuthSendReq) (res *a
 		"name":   base.DefaultSetting.Title,
 		"code":   code,
 		"expire": int64(expire.Seconds()) / 60,
-		"url":    "https://baidu.com",
+		"url":    "https://" + r.Host,
 	}
 	u := dao.User
 	if _, err = u.Where(u.Email.Like(req.Mail)).First(); err != nil {
