@@ -16,9 +16,5 @@ jobs:
         run: sudo apt-get install wget -y
       - name: Install Goframe
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
-      - name: test
-        run: gf -h
-      - name: ls
-        run: ls
-      - name: Curl
-        run: curl ip.sb
+      - name: Checkout Project's Frontend Code
+        run: echo ${{github.repository}}
