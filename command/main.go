@@ -39,6 +39,7 @@ func mainWeb() error {
 			group.Middleware(service.Auth.Middleware)
 			group.Bind(
 				auth.Authed,
+				auth.User,
 				admin.Token,
 			)
 			group.Group("/admin", func(group *ghttp.RouterGroup) {
