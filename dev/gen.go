@@ -6,7 +6,7 @@ import (
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/hinego/gen"
-	"github.com/hinego/starter/dev/table"
+	"github.com/sucold/starter/dev/table"
 	"gorm.io/gorm"
 	"log"
 	"os"

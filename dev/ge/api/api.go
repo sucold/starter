@@ -2,7 +2,7 @@ package {{.API}}
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/hinego/starter/app/model"
+	"github.com/sucold/starter/app/model"
 	"github.com/hinego/types"
 )
 {{range $k, $v := .Actions}}

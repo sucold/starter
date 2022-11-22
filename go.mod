@@ -1,4 +1,4 @@
-module github.com/hinego/starter
+module github.com/sucold/starter
 
 go 1.19
 
@@ -13,6 +13,7 @@ require (
 	github.com/hinego/decimal v1.3.5
 	github.com/hinego/errorx v0.0.0-20221105103501-9a9e8179272b
 	github.com/hinego/gen v0.0.0-20221117091600-4eeecfa6e812
+	github.com/hinego/starter v0.0.0-20221122095714-1c272a0b0da2
 	github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9
 	github.com/hinego/types v0.0.0-20221117100212-2173e3c23c2d
 	github.com/samber/lo v1.35.0

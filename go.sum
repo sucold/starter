@@ -132,6 +132,8 @@ github.com/hinego/errorx v0.0.0-20221105103501-9a9e8179272b h1:nVaRB/7JIsWbKXJZc
 github.com/hinego/errorx v0.0.0-20221105103501-9a9e8179272b/go.mod h1:xpYqqsD9kwXdxdAPervDYxybjqX7FN4Ld51hjKU8qMU=
 github.com/hinego/gen v0.0.0-20221117091600-4eeecfa6e812 h1:ZOdQt7OD5hN3ua3St4tbS8ZRJWgHJtc2c/1a4gl6FqM=
 github.com/hinego/gen v0.0.0-20221117091600-4eeecfa6e812/go.mod h1:FuILz+yeOyQQI4mBuhR2MCw382XEy+IsshF713p6pu8=
+github.com/hinego/starter v0.0.0-20221122095714-1c272a0b0da2 h1:ZjrMBqR1gKVaVZ4xPAQLNWiOc/EwtnsNZTowJ5tPLtI=
+github.com/hinego/starter v0.0.0-20221122095714-1c272a0b0da2/go.mod h1:MikPeS7i082+UuJWHl1F7BsPw/u4bIwvEKGZBB3gkKc=
 github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9 h1:RQv6haQhnBebRnuSdpBGBSd5rq5vlh8zH1n5Op7TPIU=
 github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9/go.mod h1:PVRVNDFpF09/FRv3z+Q2WeWBnZXJNa38JNDq+H1wurs=
 github.com/hinego/types v0.0.0-20221117100212-2173e3c23c2d h1:7PJoifP6WeLjoz360CxeABKf1A0XikfCYl91c4lOg8I=

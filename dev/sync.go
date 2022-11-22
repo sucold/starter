@@ -30,7 +30,7 @@ var syn = &gcmd.Command{
 		for _, f := range file {
 			content := gfile.GetContents(f)
 			if strings.Contains(content, "github.com/hinego/conset") {
-				err = gfile.PutContents(f, strings.ReplaceAll(content, "github.com/hinego/conset", "github.com/hinego/starter/app/conset"))
+				err = gfile.PutContents(f, strings.ReplaceAll(content, "github.com/hinego/conset", "github.com/sucold/starter/app/conset"))
 				log.Println(f, err)
 			}
 		}

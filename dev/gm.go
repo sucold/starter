@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/gfile"
-	"github.com/hinego/starter/dev/ge"
+	"github.com/sucold/starter/dev/ge"
 )
 
 func init() {

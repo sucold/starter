@@ -3,9 +3,9 @@ package {{.Controller}}
 import (
 	"context"
 	"github.com/hinego/errorx"
-	{{.API}} "github.com/hinego/starter/api/{{.API}}"
-	"github.com/hinego/starter/app/dao"
-	"github.com/hinego/starter/app/model"
+	{{.API}} "github.com/sucold/starter/api/{{.API}}"
+	"github.com/sucold/starter/app/dao"
+	"github.com/sucold/starter/app/model"
 	"github.com/hinego/types"
 )
 
