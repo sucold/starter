@@ -17,6 +17,8 @@ require (
 	github.com/hinego/types v0.0.0-20221117100212-2173e3c23c2d
 	github.com/samber/lo v1.35.0
 	golang.org/x/crypto v0.3.0
+	gorm.io/driver/mysql v1.4.4
+	gorm.io/driver/postgres v1.4.5
 	gorm.io/driver/sqlite v1.4.3
 	gorm.io/gorm v1.24.1
 	gorm.io/plugin/dbresolver v1.3.0
@@ -77,8 +79,6 @@ require (
 	gopkg.in/ini.v1 v1.56.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.0.7 // indirect
-	gorm.io/driver/mysql v1.4.4 // indirect
-	gorm.io/driver/postgres v1.4.5 // indirect
 	gorm.io/driver/sqlserver v1.4.1 // indirect
 	gorm.io/hints v1.1.1 // indirect
 )
