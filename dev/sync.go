@@ -17,12 +17,12 @@ var syn = &gcmd.Command{
 	Usage: "sync",
 	Brief: "[开发专用]同步模块",
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-		//log.Println("删除原模块", gfile.Remove("./app/conset"))
-		//log.Println("删除原模块", gfile.Remove(".git/modules/app"))
-		//Bash("git submodule sync", "更新")
-		//Bash("git submodule sync --recursive", "更新")
-		//Bash("git submodule add https://github.com/hinego/conset   app/conset", "同步结果")
-		//Bash("git submodule update --remote", "同步结果")
+		log.Println("删除原模块", gfile.Remove("./app/conset"))
+		log.Println("删除原模块", gfile.Remove(".git/modules/app"))
+		Bash("git submodule sync", "更新")
+		Bash("git submodule sync --recursive", "更新")
+		Bash("git submodule add https://github.com/hinego/conset   app/conset", "同步结果")
+		Bash("git submodule update --remote", "同步结果")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
 			return nil
