@@ -8,6 +8,10 @@ go run ./dev gcc-
 git submodule add https://github.com/hinego/conset/  app/conset
 rm app/conset
 git submodule update --remote
+
+git subtree add --prefix=app/conset conset master
+git subtree pull --prefix=app/conset conset master
+
 ```
 
 
