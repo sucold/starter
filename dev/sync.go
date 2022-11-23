@@ -21,7 +21,7 @@ var syn = &gcmd.Command{
 		log.Println("删除原模块", gfile.Remove(".git/modules/app"))
 		Bash("git submodule sync", "更新")
 		Bash("git submodule sync --recursive", "更新")
-		Bash("git submodule add https://github.com/hinego/conset   app/conset", "同步结果")
+		Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
 		Bash("git submodule update --remote", "同步结果")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
@@ -29,8 +29,8 @@ var syn = &gcmd.Command{
 		}
 		for _, f := range file {
 			content := gfile.GetContents(f)
-			if strings.Contains(content, "github.com/hinego/conset") {
-				err = gfile.PutContents(f, strings.ReplaceAll(content, "github.com/hinego/conset", "github.com/sucold/starter/app/conset"))
+			if strings.Contains(content, "github.com/sucold/conset") {
+				err = gfile.PutContents(f, strings.ReplaceAll(content, "github.com/sucold/conset", "github.com/sucold/starter/app/conset"))
 				log.Println(f, err)
 			}
 		}
