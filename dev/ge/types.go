@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gfile"
+	"github.com/sucold/starter/dev/fun"
 	"log"
-	"os/exec"
 	"strings"
 )
 
@@ -110,13 +110,13 @@ func (r *APP) generate() {
 			if !gfile.Exists(conPath) {
 				control, err := g.View().ParseContent(context.TODO(), controllerTemplate, data)
 				log.Println(err, gfile.PutContents(conPath, control))
-				Bash("git add "+conPath, "git add "+conPath)
+				fun.Bash("git add "+conPath, "git add "+conPath)
 			}
 			ApiPath := fmt.Sprintf("./api/%v/%v.go", model.API, model.NameLower)
 			if !gfile.Exists(ApiPath) {
 				control, err := g.View().ParseContent(context.TODO(), apiTemplate, data)
 				log.Println(err, gfile.PutContents(ApiPath, control))
-				Bash("git add "+ApiPath, "git add "+ApiPath)
+				fun.Bash("git add "+ApiPath, "git add "+ApiPath)
 			}
 		}
 		for _, model := range group.Logic {
@@ -125,12 +125,8 @@ func (r *APP) generate() {
 			if !gfile.Exists(ApiPath) {
 				control, err := g.View().ParseContent(context.TODO(), logicTemplate, data)
 				log.Println(err, gfile.PutContents(ApiPath, control))
-				Bash("git add "+ApiPath, "git add "+ApiPath)
+				fun.Bash("git add "+ApiPath, "git add "+ApiPath)
 			}
 		}
 	}
-}
-func Bash(sh string, desc string) {
-	output, err := exec.Command("cmd", "/C", sh).CombinedOutput()
-	log.Println(desc, err, string(output))
 }

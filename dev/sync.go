@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/gfile"
+	"github.com/sucold/starter/dev/fun"
 	"log"
 	"strings"
 )
@@ -19,10 +20,10 @@ var syn = &gcmd.Command{
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 		log.Println("删除原模块", gfile.Remove("./app/conset"))
 		log.Println("删除原模块", gfile.Remove(".git/modules/app"))
-		Bash("git submodule sync", "更新")
-		Bash("git submodule sync --recursive", "更新")
-		Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
-		Bash("git submodule update --remote", "同步结果")
+		fun.Bash("git submodule sync", "更新")
+		fun.Bash("git submodule sync --recursive", "更新")
+		fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
+		fun.Bash("git submodule update --remote", "同步结果")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
 			return nil
@@ -39,7 +40,7 @@ var syn = &gcmd.Command{
 			log.Println("复制main.go", err)
 			err = gfile.ReplaceFile("package command", "package cmd", "./app/cmd/main.go")
 			log.Println("替换main.go", err)
-			Bash("git add app/cmd/main.go", "git add")
+			fun.Bash("git add app/cmd/main.go", "git add")
 			gfile.Remove("./app/cmd/main.re.go")
 		}
 		return nil
