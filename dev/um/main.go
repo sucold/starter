@@ -23,7 +23,7 @@ var Main = &gcmd.Command{
 		if !gfile.Exists("package.json") {
 			return errors.New("请在项目根目录执行")
 		}
-		cmd := `git clone https://github.com/hinego/uminew.git /projects/git/uminew`
+		cmd := `git clone https://github.com/sucold/starter-ui.git /projects/git/uminew`
 		Bash(cmd, "clone 到本地")
 		Bash("git -C /projects/git/uminew reset --hard", "重置")
 		Bash("git -C /projects/git/uminew fetch --all", "获取最新版本")
