@@ -13,6 +13,7 @@ jobs:
         with:
           repository: ${{github.repository}}-ui
           path: 'ui'
+          token: ${{ secrets.ME_SECRET_TOKEN }}
       - name: Set Up Golang Environment
         uses: actions/setup-go@v2
         with:
@@ -23,5 +24,12 @@ jobs:
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
       - name: Checkout Project's Frontend Code
         run: ls
-      - name: Build Frontend Code
-        run: ls ui
+      - name: Upload file to R2
+        uses: magicwallet/r2-upload@main
+        with:
+          endpoint: ${{ secrets.R2_ENDPOINT }}
+          access_key_id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          secret_access_key: ${{ secrets.R2_ACCESS_SECRET_KEY }}
+          bucket: ${{ secrets.R2_BUCKET }}
+          file: 'go.mod'
+          destination: 'public'
