@@ -25,8 +25,12 @@ jobs:
         run: sudo apt-get install wget -y
       - name: Install Goframe
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Build Frontend
-        run: node -v
+        run: node -v && pnpm -v
         working-directory: ./ui
       - name: Build Frontend2
         run: ls
