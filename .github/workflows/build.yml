@@ -2,7 +2,15 @@ name: Build and Deploy
 
 on: push
 jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+    steps:
+      - id: step1
+        run: echo `date "+%Y_%m%d_%H%M"` >> $GITHUB_OUTPUT
   build:
+    needs: job1
     name: Build And Release
     runs-on: ubuntu-latest
     steps:
@@ -35,8 +43,8 @@ jobs:
       - name: Copy Frontend File
         run: ls && cp -r dist/* ../public/
         working-directory: ./ui
-      - name: Build Frontend3
-        run: ls public
+      - name: Build Backend
+        run: gf build && ls temp && ls temp/*
         working-directory: ./
       - name: Upload file to R2
         uses: magicwallet/r2-upload@main
@@ -46,4 +54,4 @@ jobs:
           secret_access_key: ${{ secrets.R2_ACCESS_SECRET_KEY }}
           bucket: ${{ secrets.R2_BUCKET }}
           file: 'go.mod'
-          destination: 'public'
+          destination: ${{github.repository}}
