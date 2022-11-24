@@ -3,7 +3,7 @@ package fun
 import (
 	"log"
 	"os/exec"
-	"runtime"
+	runtime "runtime"
 )
 
 func Bash(sh string, desc string) {
@@ -14,5 +14,4 @@ func Bash(sh string, desc string) {
 		output, err := exec.Command("bash", sh).CombinedOutput()
 		log.Println(desc, err, string(output))
 	}
-
 }
