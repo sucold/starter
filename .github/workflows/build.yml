@@ -39,6 +39,9 @@ jobs:
         run: ls && cp -r dist/* ../public/
         working-directory: ./ui
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
+      - name: Run Sync
+        run: go run ./dev sync
+        working-directory: ./dev/um
       - name: Build Backend
         run: gf build && ls temp && ls temp/*
         working-directory: ./
