@@ -32,11 +32,11 @@ jobs:
       - name: Build Frontend
         run: pnpm install && pnpm run build
         working-directory: ./ui
-      - name: Build Frontend2
-        run: ls
+      - name: Copy Frontend File
+        run: cp dist/ ../public/
         working-directory: ./ui
       - name: Build Frontend3
-        run: ls
+        run: ls public
         working-directory: ./
       - name: Upload file to R2
         uses: magicwallet/r2-upload@main
