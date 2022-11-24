@@ -33,7 +33,7 @@ jobs:
         run: pnpm install && pnpm run build
         working-directory: ./ui
       - name: Copy Frontend File
-        run: ls && cp dist/ ../public/
+        run: ls && cp -r dist/ ../public/
         working-directory: ./ui
       - name: Build Frontend3
         run: ls public
