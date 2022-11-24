@@ -5,6 +5,9 @@ jobs:
   build:
     name: Build And Release
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: github.com/hinego,github.com/sucold
+      GH_ACCESS_TOKEN: ${{ secrets.ME_SECRET_TOKEN }}
     steps:
       - name: Checkout Backend Code
         uses: actions/checkout@v3
@@ -35,6 +38,7 @@ jobs:
       - name: Copy Frontend File
         run: ls && cp -r dist/* ../public/
         working-directory: ./ui
+      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Build Backend
         run: gf build && ls temp && ls temp/*
         working-directory: ./
@@ -45,5 +49,5 @@ jobs:
           access_key_id: ${{ secrets.R2_ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.R2_ACCESS_SECRET_KEY }}
           bucket: ${{ secrets.R2_BUCKET }}
-          file: 'go.mod'
+          file: 'temp/linux_amd64/status_linux'
           destination: ${{github.repository}}
