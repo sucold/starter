@@ -27,6 +27,13 @@ jobs:
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
       - name: Build Frontend
         run: node -v
+        working-directory: ./ui
+      - name: Build Frontend2
+        run: ls
+        working-directory: ./ui
+      - name: Build Frontend3
+        run: ls
+        working-directory: ./
       - name: Upload file to R2
         uses: magicwallet/r2-upload@main
         with:
