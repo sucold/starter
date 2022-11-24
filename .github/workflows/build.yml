@@ -2,15 +2,7 @@ name: Build and Deploy
 
 on: push
 jobs:
-  job1:
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
-    steps:
-      - id: step1
-        run: echo `date "+%Y_%m%d_%H%M"` >> $GITHUB_OUTPUT
   build:
-    needs: job1
     name: Build And Release
     runs-on: ubuntu-latest
     steps:
