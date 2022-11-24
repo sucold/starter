@@ -30,7 +30,7 @@ jobs:
         with:
           version: latest
       - name: Build Frontend
-        run: node -v && pnpm -v
+        run: pnpm install && pnpm run build
         working-directory: ./ui
       - name: Build Frontend2
         run: ls
