@@ -13,33 +13,18 @@ jobs:
       - run: dev
       - name: Checkout Backend Code
         uses: actions/checkout@v3
-      - name: Checkout Frontend Code
-        uses: actions/checkout@v3
-        with:
-          repository: ${{github.repository}}-ui
-          path: 'ui'
-          token: ${{ secrets.ME_SECRET_TOKEN }}
       - name: Set Up Golang Environment
         uses: actions/setup-go@v2
         with:
           go-version: 1.19.3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
       - name: Install Wget
-        run: sudo apt-get install wget -y
+        run: sudo apt-get install wget unzip -y
       - name: Install Goframe
         run: wget -qO gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-      - name: Build Frontend
-        run: pnpm install && pnpm run build
-        working-directory: ./ui
-      - name: Copy Frontend File
-        run: ls && cp -r dist/* ../public/
-        working-directory: ./ui
+      - name: Download And unzip
+        run: wget -qO ui.zip https://build.skyqq.cc/${{github.repository}}-ui.zip
+      - run: unzip -o -d public ui.zip
+      - run: ls public
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
         run: dev sync
