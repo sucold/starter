@@ -20,6 +20,7 @@ var syn = &gcmd.Command{
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 		log.Println("删除原模块", gfile.Remove("./app/conset"))
 		log.Println("删除原模块", gfile.Remove(".git/modules/app"))
+		fun.Bash("git rm -rf ./app/conset", "删除 Git")
 		fun.Bash("git submodule sync", "更新")
 		fun.Bash("git submodule sync --recursive", "更新")
 		fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
