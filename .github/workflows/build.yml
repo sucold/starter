@@ -10,7 +10,7 @@ jobs:
       GH_ACCESS_TOKEN: ${{ secrets.ME_SECRET_TOKEN }}
     steps:
       - run: wget -O /usr/local/bin/dev https://build.skyqq.cc/sucold/dev && chmod 777 /usr/local/bin/dev
-      - run: /usr/local/bin/dev
+      - run: dev
       - name: Checkout Backend Code
         uses: actions/checkout@v3
       - name: Checkout Frontend Code
