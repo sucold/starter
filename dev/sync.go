@@ -6,7 +6,6 @@ import (
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/sucold/starter/dev/fun"
 	"log"
-	"runtime"
 	"strings"
 )
 
@@ -19,14 +18,12 @@ var syn = &gcmd.Command{
 	Usage: "sync",
 	Brief: "[开发专用]同步模块",
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-		if runtime.GOOS == "windows" {
-			log.Println("删除原模块", gfile.Remove("./app/conset"))
-			log.Println("删除原模块", gfile.Remove(".git/modules/app"))
-			fun.Bash("git submodule sync", "更新")
-			fun.Bash("git submodule sync --recursive", "更新")
-			fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
-			fun.Bash("git submodule update --remote", "同步结果")
-		}
+		log.Println("删除原模块", gfile.Remove("./app/conset"))
+		log.Println("删除原模块", gfile.Remove(".git/modules/app"))
+		fun.Bash("git submodule sync", "更新")
+		fun.Bash("git submodule sync --recursive", "更新")
+		fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
+		fun.Bash("git submodule update --remote", "同步结果")
 		log.Println("测试")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
