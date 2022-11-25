@@ -32,11 +32,14 @@ var syn = &gcmd.Command{
 		if err != nil {
 			return err
 		}
+		log.Println("文件数量", len(file))
 		for _, f := range file {
 			content := gfile.GetContents(f)
 			if strings.Contains(content, "github.com/sucold/conset") {
 				err = gfile.PutContents(f, strings.ReplaceAll(content, "github.com/sucold/conset", "github.com/sucold/starter/app/conset"))
 				log.Println(f, err)
+			} else {
+				log.Println(f, "不包含")
 			}
 		}
 		if !gfile.Exists("./app/cmd/main.go") {
