@@ -27,9 +27,10 @@ var syn = &gcmd.Command{
 			fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
 			fun.Bash("git submodule update --remote", "同步结果")
 		}
+		log.Println("测试")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
-			return nil
+			return err
 		}
 		for _, f := range file {
 			content := gfile.GetContents(f)
