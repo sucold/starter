@@ -32,12 +32,12 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: latest
-#      - name: Build Frontend
-#        run: pnpm install && pnpm run build
-#        working-directory: ./ui
-#      - name: Copy Frontend File
-#        run: ls && cp -r dist/* ../public/
-#        working-directory: ./ui
+      - name: Build Frontend
+        run: pnpm install && pnpm run build
+        working-directory: ./ui
+      - name: Copy Frontend File
+        run: ls && cp -r dist/* ../public/
+        working-directory: ./ui
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
         run: ls && ls -a && ls app && ls app/conset && go run ./dev sync
