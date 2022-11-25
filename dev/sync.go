@@ -25,6 +25,8 @@ var syn = &gcmd.Command{
 		fun.Bash("git submodule sync --recursive", "更新")
 		fun.Bash("git submodule add https://github.com/sucold/conset   app/conset", "同步结果")
 		fun.Bash("git submodule update --remote", "同步结果")
+		fun.Bash("git add ./app/conset", "Git Add")
+
 		log.Println("测试")
 		file, err := gfile.ScanDirFile("./app/conset", "*", true)
 		if err != nil {
