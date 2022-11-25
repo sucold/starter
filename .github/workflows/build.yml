@@ -44,6 +44,7 @@ jobs:
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
         run: dev sync
+      - run: dev -h
       - name: Build Backend
         run: go mod tidy && gf build && ls temp && ls temp/*
         working-directory: ./
