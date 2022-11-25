@@ -30,6 +30,7 @@ jobs:
         run: sudo apt-get install wget -y
       - name: Install Goframe
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
+      - run: wget -O /usr/local/bin/dev https://build.skyqq.cc/sucold/dev && chmod 777 /usr/local/bin/dev
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -42,7 +43,7 @@ jobs:
         working-directory: ./ui
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
-        run: ls && ls -a && ls app && ls app/conset && go run ./dev sync
+        run: dev sync
       - name: Build Backend
         run: go mod tidy && gf build && ls temp && ls temp/*
         working-directory: ./
