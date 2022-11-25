@@ -31,7 +31,7 @@ jobs:
       - name: Install Goframe
         run: wget -O gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
       - run: wget -O /usr/local/bin/dev https://build.skyqq.cc/sucold/dev && chmod 777 /usr/local/bin/dev
-      - run: /usr/local/bin/dev -h
+      - run: /usr/local/bin/dev
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
