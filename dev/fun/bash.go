@@ -11,7 +11,7 @@ func Bash(sh string, desc string) {
 		output, err := exec.Command("cmd", "/C", sh).CombinedOutput()
 		log.Println(desc, err, string(output))
 	} else {
-		output, err := exec.Command("bash", sh).CombinedOutput()
+		output, err := exec.Command("/bin/bash", "-c", sh).CombinedOutput()
 		log.Println(desc, err, string(output))
 	}
 }
