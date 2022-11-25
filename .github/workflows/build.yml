@@ -40,7 +40,7 @@ jobs:
         working-directory: ./ui
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
-        run: go run ./dev sync
+        run: ls && go run ./dev sync
       - name: Build Backend
         run: go mod tidy && gf build && ls temp && ls temp/*
         working-directory: ./
