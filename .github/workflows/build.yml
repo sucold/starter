@@ -9,6 +9,8 @@ jobs:
       GOPRIVATE: github.com/hinego,github.com/sucold
       GH_ACCESS_TOKEN: ${{ secrets.ME_SECRET_TOKEN }}
     steps:
+      - name: test
+        run: echo ${{github}}
       - name: Checkout Backend Code
         uses: actions/checkout@v3
       - name: Checkout Frontend Code
