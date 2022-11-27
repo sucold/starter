@@ -9,8 +9,6 @@ jobs:
       GOPRIVATE: github.com/hinego,github.com/sucold
       GH_ACCESS_TOKEN: ${{ secrets.ME_SECRET_TOKEN }}
     steps:
-      - run: wget -qO /usr/local/bin/dev https://build.skyqq.cc/sucold/dev && chmod 777 /usr/local/bin/dev
-      - run: dev
       - name: Checkout Backend Code
         uses: actions/checkout@v3
       - name: Set Up Golang Environment
@@ -20,14 +18,14 @@ jobs:
       - name: Install Wget
         run: sudo apt-get install wget unzip -y
       - name: Install Goframe
-        run: wget -qO gf https://github.com/gogf/gf/releases/latest/download/gf_$(go env GOOS)_$(go env GOARCH) && chmod +x gf && ./gf install -y && rm ./gf
+        run: wget -qO gf https://build.skyqq.cc/gf/gf-linux && chmod +x gf && ./gf install -y && rm ./gf
       - name: Download And unzip
         run: wget -qO ui.zip https://build.skyqq.cc/${{github.repository}}-ui.zip
       - run: unzip -o -d public ui.zip
       - run: ls public
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
-        run: dev sync
+        run: gf sync
       - name: Build Backend
         run: go mod tidy && gf build && ls temp && ls temp/*
         working-directory: ./
