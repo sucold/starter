@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/gogf/gf/v2/os/gfile"
+	"github.com/gogf/gf/v2/os/gproc"
 	"github.com/hinego/gen"
 	"gorm.io/gorm"
 	"log"
@@ -60,6 +61,8 @@ var gn = &gcmd.Command{
 			g1.ApplyBasic(g1.GenerateAllTable()...)
 		}
 		g1.Execute()
+		gproc.MustShellRun(ctx, "git add ./app/dao")
+		gproc.MustShellRun(ctx, "git add ./app/model")
 		db, err := gdb.DB()
 		if err == nil {
 			db.Close()
