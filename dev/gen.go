@@ -4,17 +4,13 @@ import (
 	"context"
 	"errors"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/hinego/gen"
-	"github.com/sucold/starter/dev/table"
 	"gorm.io/gorm"
 	"log"
 	"os"
 )
-
-func init() {
-	AddCommand(gn)
-}
 
 var g1 *gen.Generator
 var genConfig *gen.CmdParams
@@ -22,7 +18,7 @@ var gdb *gorm.DB
 
 func prepare(ctx context.Context, parser *gcmd.Parser) {
 	os.Remove("/etc/gen.db")
-	log.SetFlags(log.Llongfile)
+	log.SetFlags(log.Ldate | log.Ltime)
 	genConfig = gen.ArgParse()
 	if genConfig == nil {
 		log.Fatalf("parse genConfig fail")
@@ -51,19 +47,15 @@ func prepare(ctx context.Context, parser *gcmd.Parser) {
 }
 
 var gn = &gcmd.Command{
-	Name:  "gen",
-	Usage: "gen",
+	Name:  "main",
+	Usage: "main",
 	Brief: "[开发专用]生成dao",
 	Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 		if !gfile.Exists("go.mod") {
 			return errors.New("此为开发使用命令")
 		}
 		prepare(ctx, parser)
-		m := []any{
-			table.Token{},
-			table.User{},
-		}
-		g1.LinkModel(m...)
+		g1.LinkModel(Md...)
 		if !genConfig.OnlyModel {
 			g1.ApplyBasic(g1.GenerateAllTable()...)
 		}
@@ -75,4 +67,8 @@ var gn = &gcmd.Command{
 		}
 		return nil
 	},
+}
+
+func main() {
+	gn.Run(gctx.New())
 }

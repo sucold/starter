@@ -9,7 +9,7 @@ type Model struct {
 	CreatedAt int64 `json:"-"`
 	UpdatedAt int64 `json:"-"`
 }
-type Token struct {
+type Token struct { //addition.go
 	Model
 	Code      string `json:"code" gorm:"unique"`
 	Expire    int64  `json:"expire"`     //过期时间
@@ -21,8 +21,7 @@ type Token struct {
 	Data      string `json:"data"`       //数据内容
 	Role      string `json:"role"`
 }
-
-type User struct {
+type User struct { //addition.go
 	Model
 	Name     string          `json:"name"`
 	Email    string          `json:"email" gorm:"unique"`                   //用户邮箱

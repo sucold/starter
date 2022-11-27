@@ -1,0 +1,17 @@
+- api: v2
+  controller: test
+  model:
+    - name: User
+      tags: 用户
+      actions:
+        - action: Fetch
+        - action: Delete
+        - action: Create
+        - action: Update
+        - action: Get
+        - action: Test
+          default: true
+          method: GET
+          sm: 测试接口
+  logic:
+    - name: User
