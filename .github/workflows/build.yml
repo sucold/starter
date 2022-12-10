@@ -1,6 +1,10 @@
 name: Build and Deploy
 
-on: push
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
   build:
     name: Build And Release
@@ -16,12 +20,22 @@ jobs:
         with:
           go-version: 1.19.3
       - name: Install Wget
-        run: sudo apt-get install wget unzip -y
-      - name: Install Goframe
-        run: wget -qO gf https://build.skyqq.cc/gf/gf-linux && chmod +x gf && ./gf install -y && rm ./gf
-      - name: Download And unzip
-        run: wget -qO ui.zip https://build.skyqq.cc/${{github.repository}}-ui.zip
-      - run: unzip -o -d public ui.zip
+        run: sudo apt-get install unzip -y
+      - uses: robinraju/release-downloader@v1.6
+        with:
+          repository: "sucold/dev"
+          latest: true
+          fileName: "*-linux"
+          token: ${{ secrets.ME_SECRET_TOKEN }}
+      - name: Install Goframe And Upload
+        run: ls && mv gf-linux /usr/local/bin/gf && mv upload-linux /usr/local/bin/upload && chmod +x /usr/local/bin/gf && chmod +x /usr/local/bin/upload
+      - uses: robinraju/release-downloader@v1.6
+        with:
+          repository: ${{github.repository}}-ui
+          latest: true
+          fileName: "dist.zip"
+          token: ${{ secrets.ME_SECRET_TOKEN }}
+      - run: unzip -o -d public dist.zip
       - run: ls public
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run Sync
@@ -38,3 +52,11 @@ jobs:
           bucket: ${{ secrets.R2_BUCKET }}
           file: 'temp/linux_amd64/status_linux'
           destination: ${{github.repository}}
+      - name: Upload to Systemd
+        run: upload temp/linux_amd64/status_linux
+      - run: mkdir ${{github.repository_owner}} && cp -rf temp/linux_amd64/status_linux ${{github.repository}}-linux-amd64 && ls ${{github.repository_owner}}
+      - uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          artifacts: ${{github.repository}}-linux-amd64
+          token: ${{ secrets.ME_SECRET_TOKEN }}
