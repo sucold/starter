@@ -1,17 +1,19 @@
-- api: v2
-  controller: test
+- api: v8
+  controller: admin
+  controller_path: app/conset/controller
+  logic_path: app/conset/logic
+  api_path: app/conset/api
   model:
-    - name: User
-      tags: 用户
+    - name: Conf
+      tags: 配置
       actions:
         - action: Fetch
-        - action: Delete
         - action: Create
         - action: Update
         - action: Get
-        - action: Test
-          default: true
-          method: GET
-          sm: 测试接口
+#        - action: Test
+#          default: true
+#          method: GET
+#          sm: 测试接口
   logic:
     - name: User
