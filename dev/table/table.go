@@ -2,6 +2,7 @@ package table
 
 import (
 	"github.com/hinego/decimal"
+	"github.com/sucold/starter/app/conset/tab"
 )
 
 type Token struct { //addition.go
@@ -25,4 +26,27 @@ type User struct { //addition.go
 	Refer    int64           `json:"refer"`                                 //邀请人ID
 	IP       string          `json:"ip" dc:"注册IP"`
 	Role     string          `json:"role"`
+}
+
+type Service struct {
+	Model
+	Code     string            `json:"code"`
+	Name     string            `json:"name"`
+	Desc     string            `json:"desc"`
+	Status   tab.ServiceStatus `json:"status" field:"string"`
+	Text     string            `json:"text"`
+	Auto     bool              `json:"auto" dc:"自动启动"`
+	Data     string            `json:"data" dc:"服务的持久化数据"` //例如:同步区块号码
+	BootTime int64             `json:"boot_time" dc:"启动时间"`
+	StopTime int64             `json:"stop_time" dc:"停止时间"`
+	Form     tab.Form          `json:"form" dc:"表单" gorm:"-"`
+}
+
+type Log struct {
+	Model
+	UserID  int64  `json:"user_id"`
+	Type    string `json:"type" dc:"日志类型"`
+	LinkID  int64  `json:"link_id"`
+	Name    string `json:"name"`
+	Content string `json:"content"`
 }

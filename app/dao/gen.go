@@ -16,39 +16,49 @@ import (
 )
 
 var (
-	Q     = new(Query)
-	Token *token
-	User  *user
+	Q       = new(Query)
+	Log     *log
+	Service *service
+	Token   *token
+	User    *user
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	Log = &Q.Log
+	Service = &Q.Service
 	Token = &Q.Token
 	User = &Q.User
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:    db,
-		Token: newToken(db, opts...),
-		User:  newUser(db, opts...),
+		db:      db,
+		Log:     newLog(db, opts...),
+		Service: newService(db, opts...),
+		Token:   newToken(db, opts...),
+		User:    newUser(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Token token
-	User  user
+	Log     log
+	Service service
+	Token   token
+	User    user
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:    db,
-		Token: q.Token.clone(db),
-		User:  q.User.clone(db),
+		db:      db,
+		Log:     q.Log.clone(db),
+		Service: q.Service.clone(db),
+		Token:   q.Token.clone(db),
+		User:    q.User.clone(db),
 	}
 }
 
@@ -62,21 +72,27 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:    db,
-		Token: q.Token.replaceDB(db),
-		User:  q.User.replaceDB(db),
+		db:      db,
+		Log:     q.Log.replaceDB(db),
+		Service: q.Service.replaceDB(db),
+		Token:   q.Token.replaceDB(db),
+		User:    q.User.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Token *tokenDo
-	User  *userDo
+	Log     *logDo
+	Service *serviceDo
+	Token   *tokenDo
+	User    *userDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Token: q.Token.WithContext(ctx),
-		User:  q.User.WithContext(ctx),
+		Log:     q.Log.WithContext(ctx),
+		Service: q.Service.WithContext(ctx),
+		Token:   q.Token.WithContext(ctx),
+		User:    q.User.WithContext(ctx),
 	}
 }
 
