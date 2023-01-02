@@ -8,6 +8,7 @@ require (
 	github.com/alibabacloud-go/tea v1.1.20
 	github.com/alibabacloud-go/tea-utils v1.4.5
 	github.com/go-resty/resty/v2 v2.7.0
+	github.com/goccy/go-yaml v1.9.8
 	github.com/gogf/gf/v2 v2.2.4
 	github.com/hinego/authentic v0.0.0-20221110072710-a69ad618ba31
 	github.com/hinego/decimal v1.3.5
@@ -16,6 +17,7 @@ require (
 	github.com/hinego/tox v0.0.0-20221001162710-0f82898717f9
 	github.com/hinego/types v0.0.0-20221205112052-7ae1c51e9b50
 	github.com/samber/lo v1.35.0
+	github.com/spf13/cast v1.5.0
 	golang.org/x/crypto v0.0.0-20221005025214-4161e89ecf1b
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/driver/postgres v1.4.5
@@ -76,6 +78,7 @@ require (
 	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/tools v0.3.0 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.0.7 // indirect
