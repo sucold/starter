@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/gogf/gf/v2/os/gfile"
 	"github.com/gogf/gf/v2/os/gproc"
+	"github.com/gogf/gf/v2/text/gstr"
 	"github.com/hinego/gen"
 	"gorm.io/gorm"
 	"log"
@@ -61,6 +62,18 @@ var gn = &gcmd.Command{
 			g1.ApplyBasic(g1.GenerateAllTable()...)
 		}
 		g1.Execute()
+		file, err := gfile.ScanDirFile("app/model", "*", true)
+		if err != nil {
+			log.Println(err)
+			return nil
+		}
+		for _, v := range file {
+			log.Println(v)
+			data := gfile.GetContents(v)
+			data = gstr.Replace(data, `"github.com/gogf/gf/v2`, `"github.com/gogf/gf`)
+			data = gstr.Replace(data, `"github.com/gogf/gf`, `"github.com/gogf/gf/v2`)
+			gfile.PutContents(v, data)
+		}
 		gproc.MustShellRun(ctx, "git add ./app/dao")
 		gproc.MustShellRun(ctx, "git add ./app/model")
 		db, err := gdb.DB()
