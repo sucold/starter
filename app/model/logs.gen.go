@@ -8,14 +8,14 @@ const TableNameLog = "logs"
 
 // Log mapped from table <logs>
 type Log struct {
-	ID        int64  `gorm:"column:id;type:integer;primaryKey" json:"id"`
-	CreatedAt int64  `gorm:"column:created_at;type:integer;not null" json:"created_at"`
-	UpdatedAt int64  `gorm:"column:updated_at;type:integer;not null" json:"updated_at"`
-	UserID    int64  `gorm:"column:user_id;type:integer;not null" json:"user_id"`
-	Type      string `gorm:"column:type;type:text;not null" json:"type" dc:"日志类型"`
-	LinkID    int64  `gorm:"column:link_id;type:integer;not null" json:"link_id"`
-	Name      string `gorm:"column:name;type:text;not null" json:"name"`
-	Content   string `gorm:"column:content;type:text;not null" json:"content"`
+	ID        int64  `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	CreatedAt int64  `gorm:"column:created_at;type:bigint" json:"created_at"`
+	UpdatedAt int64  `gorm:"column:updated_at;type:bigint" json:"updated_at"`
+	UserID    int64  `gorm:"column:user_id;type:bigint" json:"user_id"`
+	Type      string `gorm:"column:type;type:text" json:"type" dc:"日志类型"`
+	LinkID    int64  `gorm:"column:link_id;type:bigint" json:"link_id"`
+	Name      string `gorm:"column:name;type:text" json:"name"`
+	Content   string `gorm:"column:content;type:text" json:"content"`
 }
 
 // TableName Log's table name

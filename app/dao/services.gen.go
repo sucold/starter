@@ -30,6 +30,8 @@ func newService(db *gorm.DB, opts ...gen.DOOption) service {
 	_service.ID = field.NewInt64(tableName, "id")
 	_service.CreatedAt = field.NewInt64(tableName, "created_at")
 	_service.UpdatedAt = field.NewInt64(tableName, "updated_at")
+	_service.Bind = field.NewString(tableName, "bind")
+	_service.BindID = field.NewInt64(tableName, "bind_id")
 	_service.Code = field.NewString(tableName, "code")
 	_service.Name = field.NewString(tableName, "name")
 	_service.Desc = field.NewString(tableName, "desc")
@@ -39,6 +41,8 @@ func newService(db *gorm.DB, opts ...gen.DOOption) service {
 	_service.Data = field.NewString(tableName, "data")
 	_service.BootTime = field.NewInt64(tableName, "boot_time")
 	_service.StopTime = field.NewInt64(tableName, "stop_time")
+	_service.Sort = field.NewInt64(tableName, "sort")
+	_service.Link = field.NewField(tableName, "link")
 
 	_service.fillFieldMap()
 
@@ -52,6 +56,8 @@ type service struct {
 	ID        field.Int64
 	CreatedAt field.Int64
 	UpdatedAt field.Int64
+	Bind      field.String
+	BindID    field.Int64
 	Code      field.String
 	Name      field.String
 	Desc      field.String
@@ -61,6 +67,8 @@ type service struct {
 	Data      field.String
 	BootTime  field.Int64
 	StopTime  field.Int64
+	Sort      field.Int64
+	Link      field.Field
 
 	fieldMap map[string]field.Expr
 }
@@ -80,6 +88,8 @@ func (s *service) updateTableName(table string) *service {
 	s.ID = field.NewInt64(table, "id")
 	s.CreatedAt = field.NewInt64(table, "created_at")
 	s.UpdatedAt = field.NewInt64(table, "updated_at")
+	s.Bind = field.NewString(table, "bind")
+	s.BindID = field.NewInt64(table, "bind_id")
 	s.Code = field.NewString(table, "code")
 	s.Name = field.NewString(table, "name")
 	s.Desc = field.NewString(table, "desc")
@@ -89,6 +99,8 @@ func (s *service) updateTableName(table string) *service {
 	s.Data = field.NewString(table, "data")
 	s.BootTime = field.NewInt64(table, "boot_time")
 	s.StopTime = field.NewInt64(table, "stop_time")
+	s.Sort = field.NewInt64(table, "sort")
+	s.Link = field.NewField(table, "link")
 
 	s.fillFieldMap()
 
@@ -105,10 +117,12 @@ func (s *service) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *service) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 12)
+	s.fieldMap = make(map[string]field.Expr, 16)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
+	s.fieldMap["bind"] = s.Bind
+	s.fieldMap["bind_id"] = s.BindID
 	s.fieldMap["code"] = s.Code
 	s.fieldMap["name"] = s.Name
 	s.fieldMap["desc"] = s.Desc
@@ -118,6 +132,8 @@ func (s *service) fillFieldMap() {
 	s.fieldMap["data"] = s.Data
 	s.fieldMap["boot_time"] = s.BootTime
 	s.fieldMap["stop_time"] = s.StopTime
+	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["link"] = s.Link
 }
 
 func (s service) clone(db *gorm.DB) service {

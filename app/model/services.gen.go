@@ -4,24 +4,26 @@
 
 package model
 
-import "github.com/sucold/starter/app/conset/tab"
-
 const TableNameService = "services"
 
 // Service mapped from table <services>
 type Service struct {
-	ID        int64             `gorm:"column:id;type:integer;primaryKey" json:"id"`
-	CreatedAt int64             `gorm:"column:created_at;type:integer;not null" json:"created_at"`
-	UpdatedAt int64             `gorm:"column:updated_at;type:integer;not null" json:"updated_at"`
-	Code      string            `gorm:"column:code;type:text;not null" json:"code"`
-	Name      string            `gorm:"column:name;type:text;not null" json:"name"`
-	Desc      string            `gorm:"column:desc;type:text;not null" json:"desc"`
-	Status    tab.ServiceStatus `gorm:"column:status;type:text;not null" json:"status" field:"string"`
-	Text      string            `gorm:"column:text;type:text;not null" json:"text"`
-	Auto      bool              `gorm:"column:auto;type:numeric;not null" json:"auto" dc:"自动启动"`
-	Data      string            `gorm:"column:data;type:text;not null" json:"data" dc:"服务的持久化数据"`
-	BootTime  int64             `gorm:"column:boot_time;type:integer;not null" json:"boot_time" dc:"启动时间"`
-	StopTime  int64             `gorm:"column:stop_time;type:integer;not null" json:"stop_time" dc:"停止时间"`
+	ID        int64                  `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	CreatedAt int64                  `gorm:"column:created_at;type:bigint" json:"created_at"`
+	UpdatedAt int64                  `gorm:"column:updated_at;type:bigint" json:"updated_at"`
+	Bind      string                 `gorm:"column:bind;type:text" json:"bind" dc:"绑定的服务"`
+	BindID    int64                  `gorm:"column:bind_id;type:bigint" json:"bind_id" dc:"绑定的服务ID（主要指绑定的网络ID）"`
+	Code      string                 `gorm:"column:code;type:text;uniqueIndex:services_code_key,priority:1" json:"code"`
+	Name      string                 `gorm:"column:name;type:text" json:"name"`
+	Desc      string                 `gorm:"column:desc;type:text" json:"desc"`
+	Status    string                 `gorm:"column:status;type:text" json:"status"`
+	Text      string                 `gorm:"column:text;type:text" json:"text"`
+	Auto      bool                   `gorm:"column:auto;type:boolean" json:"auto" dc:"自动启动"`
+	Data      string                 `gorm:"column:data;type:text" json:"data" dc:"服务的持久化数据"`
+	BootTime  int64                  `gorm:"column:boot_time;type:bigint" json:"boot_time" dc:"启动时间"`
+	StopTime  int64                  `gorm:"column:stop_time;type:bigint" json:"stop_time" dc:"停止时间"`
+	Sort      int64                  `gorm:"column:sort;type:bigint" json:"sort" dc:"排序"`
+	Link      map[string]interface{} `gorm:"column:link;type:json;serializer:auto" json:"link" dc:"链接" filed:"bytes"`
 }
 
 // TableName Service's table name

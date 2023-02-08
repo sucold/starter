@@ -8,18 +8,18 @@ const TableNameToken = "tokens"
 
 // Token mapped from table <tokens>
 type Token struct {
-	ID        int64  `gorm:"column:id;type:integer;primaryKey" json:"id"`
-	CreatedAt int64  `gorm:"column:created_at;type:integer;not null" json:"created_at"`
-	UpdatedAt int64  `gorm:"column:updated_at;type:integer;not null" json:"updated_at"`
-	Code      string `gorm:"column:code;type:text;not null" json:"code"`
-	Expire    int64  `gorm:"column:expire;type:integer;not null" json:"expire"`
-	UserID    int64  `gorm:"column:user_id;type:integer;not null" json:"user_id"`
-	IP        string `gorm:"column:ip;type:text;not null" json:"ip"`
-	UserAgent string `gorm:"column:user_agent;type:text;not null" json:"user_agent"`
-	LogoutAt  int64  `gorm:"column:logout_at;type:integer;not null" json:"logout_at"`
-	DeviceID  int64  `gorm:"column:device_id;type:integer;not null" json:"device_id"`
-	Data      string `gorm:"column:data;type:text;not null" json:"data"`
-	Role      string `gorm:"column:role;type:text;not null" json:"role"`
+	ID        int64  `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	CreatedAt int64  `gorm:"column:created_at;type:bigint" json:"created_at"`
+	UpdatedAt int64  `gorm:"column:updated_at;type:bigint" json:"updated_at"`
+	Code      string `gorm:"column:code;type:text;uniqueIndex:tokens_code_key,priority:1" json:"code"`
+	Expire    int64  `gorm:"column:expire;type:bigint" json:"expire"`
+	UserID    int64  `gorm:"column:user_id;type:bigint" json:"user_id"`
+	IP        string `gorm:"column:ip;type:text" json:"ip"`
+	UserAgent string `gorm:"column:user_agent;type:text" json:"user_agent"`
+	LogoutAt  int64  `gorm:"column:logout_at;type:bigint" json:"logout_at"`
+	DeviceID  int64  `gorm:"column:device_id;type:bigint" json:"device_id"`
+	Data      string `gorm:"column:data;type:text" json:"data"`
+	Role      string `gorm:"column:role;type:text" json:"role"`
 }
 
 // TableName Token's table name

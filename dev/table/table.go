@@ -27,19 +27,22 @@ type User struct { //addition.go
 	IP       string          `json:"ip" dc:"注册IP"`
 	Role     string          `json:"role"`
 }
-
 type Service struct {
 	Model
-	Code     string            `json:"code"`
-	Name     string            `json:"name"`
-	Desc     string            `json:"desc"`
-	Status   tab.ServiceStatus `json:"status" field:"string"`
-	Text     string            `json:"text"`
-	Auto     bool              `json:"auto" dc:"自动启动"`
-	Data     string            `json:"data" dc:"服务的持久化数据"` //例如:同步区块号码
-	BootTime int64             `json:"boot_time" dc:"启动时间"`
-	StopTime int64             `json:"stop_time" dc:"停止时间"`
-	Form     tab.Form          `json:"form" dc:"表单" gorm:"-"`
+	Bind     string         `json:"bind" dc:"绑定的服务"`
+	BindID   int64          `json:"bind_id" dc:"绑定的服务ID（主要指绑定的网络ID）"`
+	Code     string         `json:"code" gorm:"unique"` //服务代码
+	Name     string         `json:"name"`
+	Desc     string         `json:"desc"`
+	Status   string         `json:"status"`
+	Text     string         `json:"text"`
+	Auto     bool           `json:"auto" dc:"自动启动"`
+	Data     string         `json:"data" dc:"服务的持久化数据"` //例如:同步区块号码
+	BootTime int64          `json:"boot_time" dc:"启动时间"`
+	StopTime int64          `json:"stop_time" dc:"停止时间"`
+	Form     tab.Form       `json:"form" dc:"表单" gorm:"-"`
+	Sort     int64          `json:"sort" dc:"排序"`
+	Link     map[string]any `json:"link" dc:"链接" gorm:"serializer:auto;type:json" filed:"bytes"`
 }
 
 type Log struct {
